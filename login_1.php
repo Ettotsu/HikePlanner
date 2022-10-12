@@ -4,11 +4,11 @@
     <head><title>Hikeplanner Login</title></head>
 
     <body>
-        <?php 
+        <!-- <?php 
             if($id_account == -1) {
                 echo "Username or Password invalid";
             }
-        ?>
+        ?> -->
 
         <div>
             <form method="POST" action="login_2.php">
@@ -23,7 +23,7 @@
                 <br>
                 <input type="submit" value="Sign-in"/>
 
-                <a href="projet_create_account_1.php"><strong>Sign up</strong></a>
+                <a href="create_account_1.php"><strong>Sign up</strong></a>
             </form>
 
 
