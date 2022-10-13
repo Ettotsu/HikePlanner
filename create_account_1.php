@@ -8,10 +8,10 @@
             <br>
 
             <label for="level">Select your hiking level</label>
-            <select id='level' name='level'>
-                <option value='0'>Beginner</option>
-                <option value='1'>Intermediate</option>
-                <option value='2'>Advanced</option>
+            <select id="level" name="level">
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advenced">Advanced</option>
             </select>
             <br>
 

@@ -1,5 +1,8 @@
 <html>
     <body>
+        <a href="edit_profile.php">Edit</a>
+        <br>
+
         <?php
             session_start();
 
@@ -8,13 +11,37 @@
             $req->execute([$_SESSION['id_account']]);
 
             $data = $req->fetch();
+        ?>
 
-        echo "<label for='email'>Your Email</label>
-            <input id='email' name='email' type='text' value=".$data["email"]."><br>";
-        echo "<label for='username'>Username</label>
-        <input id='username' name='username' type='text' value=".$data["username"]."><br>";
-        echo "<label for='level'>Your Level</label>
-        <input id='level' name='level' type='text' value=".$data["level"].">";
-        ?>     
+        <label>Your Email : </label>
+
+        <?php
+            echo $data["email"];
+        ?>
+        <br>
+        <label>Username : </label> 
+
+        <?php
+            echo $data["username"];
+        ?>
+        <br>
+        <label>Your Level : </label>
+
+        <?php
+            echo $data["level"];
+        ?>   
+        <br>
+        <label>Your weight : </label>
+
+        <?php
+            echo $data["weight"];
+        ?>
+        <br>
+        <label>Your size : </label>
+
+        <?php
+            echo $data["size"];
+        ?>
+          
     </body>
 </html>
