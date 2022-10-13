@@ -15,6 +15,6 @@
         <input id='username' name='username' type='text' value=".$data["username"]."><br>";
         echo "<label for='level'>Your Level</label>
         <input id='level' name='level' type='text' value=".$data["level"].">";
-        ?>        
+        ?>     
     </body>
 </html>
