@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 12 oct. 2022 à 17:00
+-- Généré le : jeu. 13 oct. 2022 à 15:27
 -- Version du serveur : 10.4.24-MariaDB
 -- Version de PHP : 8.1.6
 
@@ -42,8 +42,8 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`id`, `username`, `password`, `email`, `level`, `weight`, `size`) VALUES
-(1, 'Catherine', '12h06', '', 0, 0, 0),
-(20, 'Drakejuice', 'dfdfdfd', 'bertrand.huberty@orange.fr', 0, 0, 2);
+(1, 'Catherine', '12h06', 'catherine-de-midi-six@time.com', 0, 0, 0),
+(21, 'Drake', 'fff', 'babacooldu95@gmail.com', 1, 400, 20);
 
 --
 -- Index pour les tables déchargées
@@ -63,7 +63,7 @@ ALTER TABLE `account`
 -- AUTO_INCREMENT pour la table `account`
 --
 ALTER TABLE `account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
