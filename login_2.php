@@ -18,7 +18,7 @@
                 header("Location: login_1.php");
 
             } else {
-                $_SESSION['id_account'] = $result;
+                $_SESSION['id_account'] = $result["id"];
                 header("Location: accueil.html");
             } 
         ?>
