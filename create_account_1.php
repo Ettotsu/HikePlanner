@@ -1,5 +1,5 @@
 <html>
-    <head><title>Hikeplanner</title></html>
+    <head><title>Hikeplanner</title></head>
 
     <body>
         <form method="POST" action="create_account_2.php">

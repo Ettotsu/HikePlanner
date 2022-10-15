@@ -5,7 +5,7 @@ header{
 
 body{
     background: url(background.png);
-    background-size: cover;
+    background-size: 100%;
 }
 
 nav{
