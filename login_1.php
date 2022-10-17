@@ -9,8 +9,9 @@
                 echo "Username or Password invalid";
             }
         ?> -->
+        
+        <div class="form">
 
-        <div>
             <form method="POST" action="login_2.php">
 
                 <label for="username">Username : </label>
@@ -25,8 +26,6 @@
 
                 <a href="create_account_1.php"><strong>Sign up</strong></a>
             </form>
-
-
         </div>
 
     </body>

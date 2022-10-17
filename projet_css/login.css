@@ -1,18 +1,26 @@
 body{
-    background: url(https://www.metoffice.gov.uk/binaries/content/gallery/metofficegovuk/hero-images/advice/mountains/oldskool-photography-152258-unsplash.jpg) no-repeat;
+    background: url(./login.png) no-repeat;
     background-size: cover; 
 }
 
-div{
+div.form{
     display: flex;
     align-items: center;
     justify-content: center;
-
     width: 100%;
     height: 100%;
-
+    opacity: 1;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 20px;
+}
+
+div.form:not(form){
+    opacity: 0.5;
+}
+
+p{
+    padding: 100px;
+    background-color: aqua;
 }
 
 form{
@@ -20,7 +28,6 @@ form{
     background-color: #188614;
     padding: 10px;
     padding: 20px 40px 20px 40px;
-
     text-align: center;
 }
 
