@@ -7,9 +7,30 @@
     </head>
 
     <body>
+        <?php
+        session_start();
+
+        if (isset($_SESSION['id_account']) == FALSE) {
+            //header("Location: login_1.php");
+        } 
+
+        function disconnect() {
+            unset($_SESSION['id_account']);
+            header("Location: login_1.php");
+        }
+
+        if(array_key_exists('button', $_POST)) {
+            disconnect();
+        }
+        ?>
+
         <header>
             <h1><center>Hike Planner</center></h1>
-        
+
+            <form method='post'>
+                <input type='submit' class='button' name='button' value='Disconnect'>
+            </form>
+
             <nav>
                 <ul>
                     <li>
@@ -23,6 +44,7 @@
                     <li>
                         <a href="my_runs.html">My Runs</a>
                     </li>
+
                 </ul>
             </nav>
 
