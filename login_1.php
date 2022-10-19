@@ -9,7 +9,7 @@
                 echo "Username or Password invalid";
             }
         ?> -->
-        
+        <header><img src="projet_css/HikePlanner.png"/></header>
         <div class="form">
 
             <form method="POST" action="login_2.php">
@@ -27,6 +27,8 @@
                 <a href="create_account_1.php"><strong>Sign up</strong></a>
             </form>
         </div>
-
+        <footer>
+            <a href="https://www.pexels.com/photo/scenic-photo-of-forest-with-sunlight-1757363/" target="blank"><strong>Background credit</strong></a>
+        </footer>
     </body>
 </html>
