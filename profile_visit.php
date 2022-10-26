@@ -1,14 +1,15 @@
 <html>
     <body>
-        <a href="edit_profile.php">Edit</a>
+        <br>
         <br>
 
         <?php
-            session_start();
+
+            $id = $_GET["id"];
 
             $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
             $req = $bdd->prepare("SELECT * FROM account WHERE id = ?");
-            $req->execute([$_SESSION['id_account_visit']]);
+            $req->execute([$id]);
 
             $data = $req->fetch();
         ?>
