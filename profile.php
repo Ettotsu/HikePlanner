@@ -8,7 +8,7 @@
 
             $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
             $req = $bdd->prepare("SELECT * FROM account WHERE id = ?");
-            $req->execute([$_SESSION['id_account']]);
+            $req->execute([$_SESSION['id_account_visit']]);
 
             $data = $req->fetch();
         ?>
