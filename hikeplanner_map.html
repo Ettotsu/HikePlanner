@@ -86,13 +86,13 @@
 					let customWaypointsLatLng = customWaypoints.map(function(it) { return it.latLng; });
 					let saveUrl = saveBaseUrl + '?';
 					// Concat latitudes
-					saveUrl += ('lat=' + customWaypointsLatLng[0].lat);
+					saveUrl += ('lat[]=' + customWaypointsLatLng[0].lat);
 					for (let i = 1; i < customWaypointsLatLng.length; i++) {
-						saveUrl += ('&lat=' + customWaypointsLatLng[i].lat);
+						saveUrl += ('&lat[]=' + customWaypointsLatLng[i].lat);
 					}
 					// Concat longitudes
 					for (let i = 0; i < customWaypointsLatLng.length; i++) {
-						saveUrl += ('&lng=' + customWaypointsLatLng[i].lng);
+						saveUrl += ('&lng[]=' + customWaypointsLatLng[i].lng);
 					}
 					document.location.href = saveUrl;
 					console.log(saveUrl);
