@@ -11,7 +11,7 @@
         session_start();
 
         if (isset($_SESSION['id_account']) == FALSE) {
-            //header("Location: login_1.php");
+            header("Location: login_1.php");
         } 
 
         function disconnect() {
@@ -52,6 +52,43 @@
 
         <div>
             <a href="profile.php">Profile</a>
+
+
+            <?php 
+
+            
+
+            echo "<div> <form method='post'>
+                <input id='research' name='research' type='text'/>
+                <input type='submit' class='button' name='search' value='Search'/>
+                </form> </div> <br><br>";
+
+            function research() {  
+                $research = "%";          
+                $research .= $_POST["research"];
+                $research .= "%";
+
+                $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
+                $req = $bdd->prepare("SELECT * FROM account WHERE username LIKE ?;");
+                $req->execute([$research]);
+                
+                echo "<div>";
+                if ($research != "%%") {
+                    foreach($req as $value) {
+                        $link = "profile_visit.php/?id=";
+                        $link .= $value["id"];
+                        echo "<a href='$link' >".$value['username'].'<br>'."</a>"; 
+                    }
+                }
+                echo "</div>";
+            }
+
+            if(array_key_exists('search', $_POST)) {
+                research();
+            }
+            
+            ?>
+
         </div>
 
         <footer>
