@@ -55,9 +55,7 @@
 
 
             <?php 
-
-            
-
+         
             echo "<div> <form method='post'>
                 <input id='research' name='research' type='text'/>
                 <input type='submit' class='button' name='search' value='Search'/>
@@ -69,8 +67,8 @@
                 $research .= "%";
 
                 $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
-                $req = $bdd->prepare("SELECT * FROM account WHERE username LIKE ?;");
-                $req->execute([$research]);
+                $req = $bdd->prepare("SELECT * FROM account WHERE username LIKE ? AND id != ?;");
+                $req->execute([$research, $_SESSION['id_account']]);
                 
                 echo "<div>";
                 if ($research != "%%") {
