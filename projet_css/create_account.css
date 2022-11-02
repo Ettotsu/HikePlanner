@@ -1,7 +1,6 @@
 body{
-    background: url(./login.png) no-repeat;
-    background-size: cover; 
-    font-size: medium;
+    background: url(./register.png) no-repeat;
+    background-size: cover;     
 }
 page{
     display: flex;
@@ -24,6 +23,7 @@ img{
     height: max-content;
 }
 
+
 div.formulaire{
     display: flex;
     align-items: center;
@@ -34,40 +34,38 @@ div.formulaire{
 }
 
 form{
+    font-size: large;
     color:white;
     background: rgb(64, 137 , 6, 0.8);
     padding: 1%;
     border-radius: 5%;
 }
 
-a.sign-up{
-    text-align: right;
-    float: right;
-    text-decoration: none;
-    color: white;
-    margin-top: 13px;
-}
-a.sign-up:hover{
-    text-decoration: underline;
-}
-
-.sign-in{
+.sign-up{
     background-color: rgb(64, 137, 6);
     color: white;
     border-radius: 7%;
     font-size: large;
 }
-.sign-in:hover{
+.sign-up:hover{
     background-color:blue;
 }
 
 input{
     border: none;
-    padding: 6px;
+    padding: 4px;
     background: white;
-    margin: 8px 0px 3px 0px;
+    margin: 8px 0px 2px 0px;
 }
 
+label{
+    display: inline-block;
+    width: 156px;
+}
+
+.param{
+    width: 60px;
+}
 
 /*Background credit*/
 footer{
