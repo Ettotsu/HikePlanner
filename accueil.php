@@ -38,11 +38,11 @@
                     </li>
     
                     <li>
-                        <a href="hikeplanner_map.html">New Run</a>
+                        <a href="hikeplanner_map_v2.html">New Run</a>
                     </li>
                     
                     <li>
-                        <a href="my_runs.html">My Runs</a>
+                        <a href="my_runs.php">My Runs</a>
                     </li>
 
                 </ul>
@@ -86,6 +86,10 @@
             }
             
             ?>
+            <div>
+
+
+            </div>
 
         </div>
 
