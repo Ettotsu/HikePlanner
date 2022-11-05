@@ -19,7 +19,7 @@
 
             } else {
                 $_SESSION['id_account'] = $result["id"];
-                header("Location: accueil.php");
+                header("Location: homepage.php");
             } 
         ?>
 
