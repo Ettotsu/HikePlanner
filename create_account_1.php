@@ -17,7 +17,7 @@
             <br>
 
             <label for="username">Username :</label>
-            <input id="username" name="username" type="text" placeholder="Jus de dragon"/>
+            <input id="username" name="username" type="text" placeholder="Jus-de-dragon"/>
             <br>
 
             <label for="password">Password :</label>

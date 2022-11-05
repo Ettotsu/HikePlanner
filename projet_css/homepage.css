@@ -13,7 +13,6 @@ nav li{
     background-color: rgb(64, 137 , 6);
     margin-right: 20px;
 }
-
 nav li:hover{
     background-color: rgb(23, 45, 5);
 }
@@ -27,4 +26,22 @@ nav li:hover{
 
 .deco{
     text-align: right;
+}
+
+main{
+    display: flex;
+}
+
+.side{
+    background-color: rgb(64, 137 , 6);
+    float: left;
+    text-align: center;
+}
+.side img{
+    border-radius: 50%;
+}
+
+
+footer{
+
 }
