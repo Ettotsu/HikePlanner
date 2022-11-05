@@ -34,11 +34,11 @@
             <br>
 
             <label for="weight">Your weight (in kg) :</label>
-            <input class="param" id="weight" name="weight" type="number" max="300"/>
+            <input class="param" id="weight" name="weight" type="number" min="1" max="300"/>
             <br>
 
             <label for="height">Your height (in cm) :</label>
-            <input class="param" id="height" name="size" type="number" max="250"/>
+            <input class="param" id="height" name="size" type="number" min="1" max="250"/>
             <br>
 
 

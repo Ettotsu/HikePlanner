@@ -1,9 +1,9 @@
 <html>
-    <link rel="stylesheet" type="text/css" href="projet_css/accueil.css"/>
+    <link rel="stylesheet" type="text/css" href="./projet_css/homepage.css"/>
     <meta charset="utf-8"/>
 
     <head>
-        <title>Hike Planner</title>
+        <title>Hike Planner - Homepage</title>
     </head>
 
     <body>
@@ -25,27 +25,26 @@
         ?>
 
         <header>
-            <h1><center>Hike Planner</center></h1>
-
-            <form method='post'>
-                <input type='submit' class='button' name='button' value='Disconnect'>
-            </form>
+            <img class="logo" src="./projet_css/HikePlanner.png"/>
 
             <nav>
                 <ul>
                     <li>
-                        <a href="search.php">Search</a>
+                        <a class="butt" href="homepage.php">Homepage</a>
                     </li>
     
                     <li>
-                        <a href="hikeplanner_map_v2.html">New Run</a>
+                        <a class="butt" href="hikeplanner_map_v2.html">New Run</a>
                     </li>
                     
                     <li>
-                        <a href="my_runs.php">My Runs</a>
+                        <a class="butt" href="my_runs.php">My Runs</a>
                     </li>
-
+                    <form class="deco" method='post'>
+                    <input type='submit' class='button' name='button' value='Disconnect'>
+                    </form>
                 </ul>
+
             </nav>
 
         </header>
@@ -94,7 +93,7 @@
         </div>
 
         <footer>
-            <p>Mentions légales</p>
+            <a href="./projet_css/if2.jpg">Privacy policy</a>
         </footer>
         
     </body>
