@@ -1,6 +1,6 @@
 <html>
     <body>
-        <a href="edit_profile.php">Edit</a>
+        <a href="edit_profile.php">HikePlanner - Profile edit</a>
         <br>
 
         <?php
@@ -13,7 +13,7 @@
             $data = $req->fetch();
         ?>
 
-        <label>Your Email : </label>
+        <label>Email adress : </label>
 
         <?php
             echo $data["email"];
@@ -31,13 +31,13 @@
             echo $data["level"];
         ?>   
         <br>
-        <label>Your weight : </label>
+        <label>Your weight (in kg) : </label>
 
         <?php
             echo $data["weight"];
         ?>
         <br>
-        <label>Your size : </label>
+        <label>Your height (in cm) : </label>
 
         <?php
             echo $data["size"];

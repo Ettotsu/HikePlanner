@@ -9,13 +9,13 @@
             $email = $_POST["email"];
             $level = $_POST["level"];
             $weight = $_POST["weight"];
-            $size = $_POST["size"];
+            $height = $_POST["height"];
             
             $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
             $req = $bdd->prepare("INSERT INTO account (username, password, email, level, weight, size) VALUES (?,?,?,?,?,?)");
-            $req->execute([$username, $password, $email, $level, $weight, $size]);
+            $req->execute([$username, $password, $email, $level, $weight, $height]);
 
-            header("Location: login_1.php");
+            header("Location: login.php");
         ?>
     </body>
 
