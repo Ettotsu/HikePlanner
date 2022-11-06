@@ -5,12 +5,13 @@
 
 .all {
     visibility: hidden;
-    position: fixed;
+    height: 0px;
+    transition: height 0.5s;
 }
 
 .all:target {
     visibility: visible;
-    position: static;
+    height: fit-content;
 }
 
 *[class^="overlay"] {
