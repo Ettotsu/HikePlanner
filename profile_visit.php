@@ -1,6 +1,6 @@
 <html>
     <head>
-        <a href='http://localhost/HikePlanner/accueil.php'> retour </a>
+        <a href='http://localhost/HikePlanner/homepage.php'> retour </a>
     </head>
     <body>
         <?php
