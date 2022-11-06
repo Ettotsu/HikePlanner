@@ -1,4 +1,7 @@
 <html>
+    <head>
+        <a href='http://localhost/HikePlanner/accueil.php'> retour </a>
+    </head>
     <body>
         <?php
             session_start();

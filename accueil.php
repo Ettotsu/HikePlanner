@@ -70,15 +70,15 @@
                 $req = $bdd->prepare("SELECT * FROM account WHERE username LIKE ? AND id != ?;");
                 $req->execute([$research, $_SESSION['id_account']]);
                 
-                echo "<div>";
+                echo "<p>";
                 if ($research != "%%") {
                     foreach($req as $value) {
                         $link = "profile_visit.php/?id=";
                         $link .= $value["id"];
-                        echo "<a href='$link' >".$value['username'].'<br>'."</a>"; 
+                        echo "<a href='$link' >".$value['username'].'        '."</a>"; 
                     }
                 }
-                echo "</div>";
+                echo "</p>";
             }
 
             if(array_key_exists('search', $_POST)) {
