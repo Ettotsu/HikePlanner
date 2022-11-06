@@ -15,7 +15,7 @@
             $req = $bdd->prepare("INSERT INTO account (username, password, email, level, weight, size) VALUES (?,?,?,?,?,?)");
             $req->execute([$username, $password, $email, $level, $weight, $height]);
 
-            header("Location: login_1.php");
+            header("Location: login.php");
         ?>
     </body>
 

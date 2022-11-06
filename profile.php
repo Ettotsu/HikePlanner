@@ -31,13 +31,13 @@
             echo $data["level"];
         ?>   
         <br>
-        <label>Your weight (in cm) : </label>
+        <label>Your weight (in kg) : </label>
 
         <?php
             echo $data["weight"];
         ?>
         <br>
-        <label>Your size (in kg) : </label>
+        <label>Your height (in cm) : </label>
 
         <?php
             echo $data["size"];

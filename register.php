@@ -11,7 +11,7 @@
         </div>
 
         <div class="formulaire">
-        <form method="POST" action="create_account_2.php">
+        <form method="POST" action="register_2.php">
             <label for="email">Email address :</label>
             <input id="email" name="email" type="text" placeholder="example@mail.com"/>
             <br>

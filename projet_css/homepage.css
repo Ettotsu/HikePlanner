@@ -34,12 +34,19 @@ main{
 
 .side{
     background-color: rgb(64, 137 , 6);
+    border-radius: 6px;
     float: left;
     text-align: center;
 }
 .side img{
     border-radius: 50%;
 }
+
+div.side a p{
+    color: white;
+    text-decoration: none;
+}
+
 
 
 footer{

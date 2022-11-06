@@ -25,7 +25,7 @@
                     <input id="password" name="password" type="password"/>
                     <br>
                     <input class="sign-in" type="submit" value="Sign in"/>
-                    <a class="sign-up" href="create_account_1.php">Sign up</a>
+                    <a class="sign-up" href="register.php">Sign up</a>
                 </form>
             </div>
             <footer>

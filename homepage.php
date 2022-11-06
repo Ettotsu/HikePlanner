@@ -53,8 +53,12 @@
 
         <main>
         <div class="side">
+        <br>
         <img src="./projet_css/if2.jpg"/>
         <br>
+        <br>
+        <p>
+        </p>
         <a href="profile.php">My profile</a>
         </div>
 
