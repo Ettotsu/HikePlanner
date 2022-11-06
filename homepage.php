@@ -11,12 +11,12 @@
         session_start();
 
         if (isset($_SESSION['id_account']) == FALSE) {
-            header("Location: login_1.php");
+            header("Location: login.php");
         } 
 
         function disconnect() {
             unset($_SESSION['id_account']);
-            header("Location: login_1.php");
+            header("Location: login.php");
         }
 
         if(array_key_exists('button', $_POST)) {

@@ -1,9 +1,19 @@
 *[id^="map"]{
-    height:300px;
-    /* width: 800px; */
+    height:250px;
+    width: 700px;
 }
 
-.overlay {
+.all {
+    visibility: hidden;
+    position: fixed;
+}
+
+.all:target {
+    visibility: visible;
+    position: static;
+}
+
+*[class^="overlay"] {
     text-align: center;
     position: fixed;
     top: 0;
@@ -16,7 +26,7 @@
     opacity: 0;
 }
 
-.overlay:target {
+*[class^="overlay"]:target {
     visibility: visible;
     opacity: 1;
 }
@@ -40,4 +50,26 @@
     text-decoration: none;
     transition: 0.3s ease;
     color: red;
+}
+
+table {
+    border-width:1px; 
+    border-style:solid; 
+    border-color:black;
+    border-collapse:collapse;
+}
+
+td { 
+    border-width:1px;
+    border-style:solid; 
+    border-color:black;
+    width: 8rem;
+}
+
+.comments {
+    border-width:1px;
+    border-style:solid; 
+    border-color:black;
+    width: 48rem;
+    height: 4rem;
 }

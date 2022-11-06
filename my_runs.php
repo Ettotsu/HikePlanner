@@ -17,23 +17,49 @@
 
                     $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
 
-                    $req = $bdd->prepare("SELECT * FROM run_saved WHERE id_account = ?");
-                    $req->execute([$_SESSION['id_account']]);
+                    $req_run = $bdd->prepare("SELECT id_run FROM `run_saved` WHERE id_account = ? GROUP BY id_run");
+                    $req_run->execute([$_SESSION['id_account']]);
 
                     $i = 0;
+                    $run = $req_run->fetch();
 
-                    foreach($req as $value) {
+                    while($run != null) {
+
+                        $req_marker = $bdd->prepare("SELECT latitude, longitude FROM waypoints WHERE id_run = ?");
+                        $req_marker->execute([$run["id_run"]]);
+                        
+                        $waypoint = $req_marker->fetch();
                 ?>
+
                 <div>
 
                     <div <?php echo "id='map".$i."'"; ?>>
                         <!-- Here we will have the map -->
                     </div>
 
+                    <?php
+                        $req_run_id = $bdd->prepare("SELECT * FROM `run_saved` WHERE id_account = ? AND id_run = ? ORDER BY time ASC");
+                        $req_run_id->execute([$_SESSION['id_account'], $run["id_run"]]);
+
+                        $run_id = $req_run_id->fetch();
+                        $j = 0;                        
+
+                        while($run_id != null) {
+                    ?>
+
+                    <?php if($j == 1) { 
+                        $open = 1;
+                        
+                        echo "<div id='more' class='all'>
+                        <div class='more'>";
+                        }
+                    ?>
+
                     <table>
                         <tr>
                             <th> Run </th>
                             <th> State </th>
+                            <th> Time </th>
                             <th> Date </th>
                             <th> Weather </th>
                             <th> Difficulty </th>
@@ -41,54 +67,77 @@
                         <tr>
                             <td>
                                 <?php
-                                    echo "run : ".$value["id_run"]."<br>";
+                                    echo "run : ".$run["id_run"]."<br>";
                                 ?>
                             </td>
                             <td>
                                 <?php
-                                    if($value["completed"] != NULL){
-                                        echo "completed";
-                                ?>
-                            </td>
-                            <td> 
-                                <?php
-                                    echo $value["date"];
-                                ?>
-                            </td>
-                            <td>
-                                <?php
-                                    echo $value["weather"];
-                                ?>
-                            </td>
-                            <td>
-                                <?php
-                                    echo $value["difficulty"];
-                                ?>
-                            </td>
-                                                   
-                                <?php
+                                    if($run_id["completed"] != NULL){
+                                        echo "completed"; 
                                     } else{
                                         echo "not completed yet</td>";
                                     }
                                 ?>
+                            </td>
+                            <td> 
+                                <?php
+                                    echo $run_id["time"];
+                                ?>
+                            </td>
+                            <td> 
+                                <?php
+                                    echo $run_id["date"];
+                                ?>
+                            </td>
+                            <td>
+                                <?php
+                                    echo $run_id["weather"];
+                                ?>
+                            </td>
+                            <td>
+                                <?php
+                                    echo $run_id["difficulty"];
+                                ?>
+                            </td>
                     </table>
-                    <p>
+                    <div>
                         <h4> Comments </h4>
-                        <?php
-                            echo $value["comments"];
-                        ?>
-                    </p>
+                        <p class="comments">
+                            <?php
+                                echo $run_id["comments"];
+                            ?>
+                        </p>
+                    </div>
+
+                    <?php
+                        $run_id = $req_run_id->fetch(); 
+                        $j ++;
+                        } 
+                        
+                        if($open == 1) { $open = 0; 
+                    ?>
+
+                        </div>
+                        <a href="#" class="less_button">See less -</a>
+                    </div>    
+                    
+                    <?php } ?>
+
+                    <div id="more" class="box_more_button">
+                        <a href="#more" class="more_button">See more +</a>
+                        <br><br>
+                    </div>
 
                     <div>
                         <a href="#popup" class="edit_button">edit</a>
                         <br><br>
                     </div>
 
-                    <div id="popup" class="overlay">
+                    <div id="popup" class="overlay<?php echo $i; ?>">
                         <div class="popup">
                             <h1> Run
                                 <?php
-                                    echo $value["id_run"];
+                                    echo $run["id_run"];
                                 ?>                          
                             </h1>
                             <a href="#" class="cross">&times;</a>
@@ -134,50 +183,39 @@
                     </div>
                 </div>
 
-                <?php
-                    $i ++;
-
-                    unset($value);
-                    }
-                ?>
-                
                 <!-- Javascript files -->
                 <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
                 <script type="text/javascript">
-
-                    <?php
-                        $req = $bdd->prepare("SELECT * FROM run_saved WHERE id_account = ?");
-                        $req->execute([$_SESSION['id_account']]);
-
-                        for($j = 0; $j < $i; $j ++) {
-                            $value = $req->fetch();
-                    ?>
                     
                     // Create "my_map" and insert it in the HTML element with ID "map.$i"
-                    var <?php echo "my_map".$j; ?> = L.map('<?php echo "map".$j; ?>').setView([10, 10], 10);
+                    var <?php echo "my_map".$i; ?> = L.map('<?php echo "map".$i; ?>').setView([<?php echo $waypoint["latitude"].",".$waypoint["longitude"]; ?>], 7);
                     
                     // Set up Leaflet to use OpenStreetMap with Mapbox for routing
                     L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
                         attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
                         minZoom: 1,
                         maxZoom: 15
-                    }).addTo(<?php echo "my_map".$j; ?>);
+                    }).addTo(<?php echo "my_map".$i; ?>);
 
                     <?php
-                        $req1 = $bdd->prepare("SELECT latitude, longitude FROM waypoints WHERE id_run = ?");
-                        $req1->execute([$value["id_run"]]);
+                        
 
-                        $waypoint = $req1->fetch();
+                        
 
                         while($waypoint != null) {
                     ?>
 
-                    var marker = L.marker([<?php echo $waypoint["latitude"].",".$waypoint["longitude"]; ?>]).addTo(<?php echo "my_map".$j; ?>);
+                    var marker = L.marker([<?php echo $waypoint["latitude"].",".$waypoint["longitude"]; ?>]).addTo(<?php echo "my_map".$i; ?>);
 
-                    <?php $waypoint = $req1->fetch(); }} ?>
+                    <?php $waypoint = $req_marker->fetch(); } ?>
                     
                 </script>
-                
+
+                <?php
+                    $i ++;
+                    $run = $req_run->fetch();
+                    }
+                ?>
             </p>
         </div>
     </body>
