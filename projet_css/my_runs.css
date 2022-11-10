@@ -3,56 +3,6 @@
     width: 700px;
 }
 
-.all {
-    visibility: hidden;
-    height: 0px;
-    transition: height 0.5s;
-}
-
-.all:target {
-    visibility: visible;
-    height: fit-content;
-}
-
-*[class^="overlay"] {
-    text-align: center;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgb(0, 0, 0, 0.7);
-    transition: opacity .4s;
-    visibility: hidden;
-    opacity: 0;
-}
-
-*[class^="overlay"]:target {
-    visibility: visible;
-    opacity: 1;
-}
-
-.popup {
-    margin: 6rem auto;
-    padding: 2rem;
-    background: white;
-    border-radius: 5px;
-    width: 40%;
-    position: relative;
-    transition: all 0.4s ease-in-out;
-}
-
-.popup .cross {
-    position: absolute;
-    top: 1rem;
-    right: 1.5rem;
-    font-size: 2rem;
-    font-weight: bold;
-    text-decoration: none;
-    transition: 0.3s ease;
-    color: red;
-}
-
 table {
     border-width:1px; 
     border-style:solid; 
@@ -71,6 +21,56 @@ td {
     border-width:1px;
     border-style:solid; 
     border-color:black;
-    width: 48rem;
+    width: 41rem;
     height: 4rem;
 }
+
+.edit_run {
+    z-index: 2000;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.7);
+    transition: opacity .4s;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .edit_run:target {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .edit {
+    text-align: center;
+    margin: 6rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 5px;
+    width: 45%;
+    position: relative;
+    transition: all 0.4s ease-in-out;
+  }
+
+  .edit .comments {
+    height: 3rem;
+    width: 38rem;
+  }
+
+  .edit .cross {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s ease;
+    color: #333;
+  }
+
+  .edit .cross:hover {
+    color: red;
+  }
+

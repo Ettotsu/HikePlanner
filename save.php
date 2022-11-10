@@ -4,6 +4,8 @@
 
         $lat = $_GET["lat"];
         $long = $_GET["lng"];
+        $distance = $_GET["distance"];
+        $time = $_GET["time"];
         $new = 1;
 
         $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
@@ -11,6 +13,8 @@
         $size = count($lat);
 
         echo "taille :".$size."<br>";
+        echo "distance :".$distance."<br>";
+        echo "temps :".$time."<br><br>";
 
         $req = $bdd->prepare("SELECT id_run, MAX(order_waypoint) FROM waypoints GROUP BY id_run HAVING MAX(order_waypoint) = ?");
         $req->execute([$size]);
@@ -49,14 +53,14 @@
         
         if($new == 1) {
 
-            $req = $bdd->prepare("INSERT INTO run (data) VALUES ('4')");
-            $req->execute();
+            $req = $bdd->prepare("INSERT INTO run (distance, time) VALUES (?, ?)");
+            $req->execute([$distance, $time]);
 
             $req = $bdd->prepare("SELECT MAX(id_run) FROM run");
             $req->execute();
             $id_run = $req->fetch()["MAX(id_run)"];
 
-            for($j = 0; $lat[$j] != NULL; $j++) {
+            for($j = 0; $j < count($lat); $j++) {
 
                 $req = $bdd->prepare("INSERT INTO waypoints (id_run, order_waypoint, latitude, longitude) VALUES (?,?,?,?)");
                 $req->execute([$id_run, $j + 1, $lat[$j], $long[$j]]);

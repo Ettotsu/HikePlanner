@@ -10,54 +10,44 @@
             <h2>
                 My Runs
             </h2>
-            <p>
-            
+            <?php
+                session_start();
+
+                $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
+
+                $req_run = $bdd->prepare("SELECT run_saved.id_run, run.distance, run.time FROM run_saved INNER JOIN run ON run_saved.id_run = run.id_run WHERE id_account = ? GROUP BY id_run");
+                $req_run->execute([$_SESSION['id_account']]);
+
+                $i = 0;
+                $run = $req_run->fetch();
+
+                while($run != null) {
+
+                    $req_marker = $bdd->prepare("SELECT latitude, longitude FROM waypoints WHERE id_run = ?");
+                    $req_marker->execute([$run["id_run"]]);
+                    
+                    $waypoint = $req_marker->fetch();
+            ?>
+
+            <div>
+
+                <div <?php echo "id='map".$i."'"; ?>>
+                    <!-- Here we will have the map -->
+                </div>
+
                 <?php
-                    session_start();
+                    $req_run_id = $bdd->prepare("SELECT * FROM `run_saved` WHERE id_account = ? AND id_run = ? ORDER BY time ASC");
+                    $req_run_id->execute([$_SESSION['id_account'], $run["id_run"]]);
 
-                    $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
-
-                    $req_run = $bdd->prepare("SELECT id_run FROM `run_saved` WHERE id_account = ? GROUP BY id_run");
-                    $req_run->execute([$_SESSION['id_account']]);
-
-                    $i = 0;
-                    $run = $req_run->fetch();
-
-                    while($run != null) {
-
-                        $req_marker = $bdd->prepare("SELECT latitude, longitude FROM waypoints WHERE id_run = ?");
-                        $req_marker->execute([$run["id_run"]]);
-                        
-                        $waypoint = $req_marker->fetch();
+                    $run_id = $req_run_id->fetch();
+                    
+                    while($run_id != null) {    
                 ?>
 
-                <div>
-
-                    <div <?php echo "id='map".$i."'"; ?>>
-                        <!-- Here we will have the map -->
-                    </div>
-
-                    <?php
-                        $req_run_id = $bdd->prepare("SELECT * FROM `run_saved` WHERE id_account = ? AND id_run = ? ORDER BY time ASC");
-                        $req_run_id->execute([$_SESSION['id_account'], $run["id_run"]]);
-
-                        $run_id = $req_run_id->fetch();
-                        $j = 0;                        
-
-                        while($run_id != null) {
-                    ?>
-
-                    <?php if($j == 1) { 
-                        $open = 1;
-                        
-                        echo "<div id='more' class='all'>
-                        <div class='more'>";
-                        }
-                    ?>
-
+                <div class="table_run">
+                    <h3> <?php echo"Run :".$run_id["id_run"]." distance :".$run["distance"]."km time :".$run["time"]; ?> </h3>
                     <table>
                         <tr>
-                            <th> Run </th>
                             <th> State </th>
                             <th> Time </th>
                             <th> Date </th>
@@ -65,11 +55,6 @@
                             <th> Difficulty </th>
                         </tr>
                         <tr>
-                            <td>
-                                <?php
-                                    echo "run : ".$run["id_run"]."<br>";
-                                ?>
-                            </td>
                             <td>
                                 <?php
                                     if($run_id["completed"] != NULL){
@@ -99,124 +84,111 @@
                                     echo $run_id["difficulty"];
                                 ?>
                             </td>
+                        </tr>
                     </table>
                     <div>
                         <h4> Comments </h4>
-                        <p class="comments">
-                            <?php
-                                echo $run_id["comments"];
-                            ?>
-                        </p>
-                    </div>
-
-                    <?php
-                        $run_id = $req_run_id->fetch(); 
-                        $j ++;
-                        } 
-                        
-                        if($open == 1) { $open = 0; 
-                    ?>
-
-                        </div>
-                        <a href="#" class="less_button">See less -</a>
-                    </div>    
-                    
-                    <?php } ?>
-
-                    <div id="more" class="box_more_button">
-                        <a href="#more" class="more_button">See more +</a>
-                        <br><br>
-                    </div>
-
-                    <div>
-                        <a href="#popup" class="edit_button">edit</a>
-                        <br><br>
-                    </div>
-
-                    <div id="popup" class="overlay<?php echo $i; ?>">
-                        <div class="popup">
-                            <h1> Run
+                        <div class="comments">
+                            <p>
                                 <?php
-                                    echo $run["id_run"];
-                                ?>                          
-                            </h1>
-                            <a href="#" class="cross">&times;</a>
-
-                            <form method="post" action="#">
-
-                                <table>
-                                    <tr>
-                                        <th> State </th>
-                                        <th> Date </th>
-                                        <th> Weather </th>
-                                        <th> Difficulty </th>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <select name="state" placeholder="Completed">
-                                                <option value="Completed">Completed</option>
-                                                <option value="Uncomlpleted">Uncompleted</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <input name="date" type="date" placeholder="--/--/----"/>
-                                        </td>
-                                        <td>
-                                            <input name="weather" type="text" placeholder="sunny"/>
-                                        </td>
-                                        <td>
-
-                                            <select id="level" name="level">
-                                                <option value="Beginner">Beginner</option>
-                                                <option value="Intermediate">Intermediate</option>
-                                                <option value="Advanced">Advanced</option>
-                                            </select>
-
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <input name="submit" type="submit" value="Edit"/>
-                            </form>
-
+                                    echo $run_id["comments"];
+                                ?>
+                            </p>
                         </div>
+                    </div>
+                    <a href= <?php echo"#edit_run".$run_id["number_run"]; ?>>Edit Run</a>
+                </div>
+
+                <div id=<?php echo"edit_run".$run_id["number_run"]; ?> class="edit_run">
+                    <div class="edit">
+                        <h2>Run</h2>
+                        <form method="post" action="my_runs_edit.php">
+                            <table>
+                                <tr>
+                                    <th> State </th>
+                                    <th> Time </th>
+                                    <th> Date </th>
+                                    <th> Weather </th>
+                                    <th> Difficulty </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <select name="state">
+                                            <option value="1">Completed</option>
+                                            <option value="0">Not Completed</option>
+                                        </select>
+                                    </td>
+                                    <td> 
+                                        <input name="time" type="time" placeholder="-h--min"/>
+                                    </td>
+                                    <td> 
+                                        <input name="date" type="date"/>
+                                    </td>
+                                    <td>
+                                        <input name="weather" type="text" placeholder="Sunny"/>
+                                    </td>
+                                    <td>
+                                        <select name="difficulty">
+                                            <option value="easy">Easy</option>
+                                            <option value="medium">Medium</option>
+                                            <option value="difficult">Difficult</option>
+                                            <option value="hardcore">Hardcore</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div>
+                                <h4> Comments </h4>
+                                <input class="comments" name="comments" type="text" placeholder="Enter your comments here !"/>
+                            </div>
+                            <input name="number_run" type="hidden" value=<?php echo $run_id["number_run"]; ?> />
+                            <input name="edit_run" type="submit" value="Edit"/>
+                            <input type="submit" value="Delete Run"/>
+                        </form>
+                        <a href="#" class="cross">&times;</a>
                     </div>
                 </div>
 
-                <!-- Javascript files -->
-                <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
-                <script type="text/javascript">
-                    
-                    // Create "my_map" and insert it in the HTML element with ID "map.$i"
-                    var <?php echo "my_map".$i; ?> = L.map('<?php echo "map".$i; ?>').setView([<?php echo $waypoint["latitude"].",".$waypoint["longitude"]; ?>], 7);
-                    
-                    // Set up Leaflet to use OpenStreetMap with Mapbox for routing
-                    L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-                        attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
-                        minZoom: 1,
-                        maxZoom: 15
-                    }).addTo(<?php echo "my_map".$i; ?>);
+                <?php 
+                    $run_id = $req_run_id->fetch();
+                    } 
+                ?>
+                
+            </div>
 
-                    <?php
-                        
-
-                        
-
-                        while($waypoint != null) {
-                    ?>
-
-                    var marker = L.marker([<?php echo $waypoint["latitude"].",".$waypoint["longitude"]; ?>]).addTo(<?php echo "my_map".$i; ?>);
-
-                    <?php $waypoint = $req_marker->fetch(); } ?>
-                    
-                </script>
+            <!-- Javascript files -->
+            <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+            <script type="text/javascript">
+                
+                // Create "my_map" and insert it in the HTML element with ID "map.$i"
+                var <?php echo "my_map".$i; ?> = L.map('<?php echo "map".$i; ?>').setView([<?php echo $waypoint["latitude"].",".$waypoint["longitude"]; ?>], 7);
+                
+                // Set up Leaflet to use OpenStreetMap with Mapbox for routing
+                L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+                    attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+                    minZoom: 1,
+                    maxZoom: 15
+                }).addTo(<?php echo "my_map".$i; ?>);
 
                 <?php
-                    $i ++;
-                    $run = $req_run->fetch();
-                    }
+                    
+
+                    
+
+                    while($waypoint != null) {
                 ?>
-            </p>
+
+                var marker = L.marker([<?php echo $waypoint["latitude"].",".$waypoint["longitude"]; ?>]).addTo(<?php echo "my_map".$i; ?>);
+
+                <?php $waypoint = $req_marker->fetch(); } ?>
+                
+            </script>
+
+            <?php
+                $i ++;
+                $run = $req_run->fetch();
+                }
+            ?>
         </div>
     </body>
 </html>
