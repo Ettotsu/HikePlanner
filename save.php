@@ -5,10 +5,12 @@
         $lat = $_GET["lat"];
         $long = $_GET["lng"];
         $distance = $_GET["distance"];
-        $time = $_GET["time"]
+        $time_string = $_GET["time"];
         $new = 1;
 
-        for($i = 0; $i < count($time); $i++)
+        $replace = array("h","min");
+        $time = str_replace($replace, ":", $time_string);
+        $time .= "00";
 
         $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
 
@@ -16,7 +18,7 @@
 
         echo "taille :".$size."<br>";
         echo "distance :".$distance."<br>";
-        echo "temps :".$time."<br><br>";
+        echo "temps : ".$time."<br><br>";
 
         $req = $bdd->prepare("SELECT id_run, MAX(order_waypoint) FROM waypoints GROUP BY id_run HAVING MAX(order_waypoint) = ?");
         $req->execute([$size]);

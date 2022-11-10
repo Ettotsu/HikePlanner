@@ -1,0 +1,42 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.7);
+    transition: opacity .4s;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .overlay:target {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .edit_form {
+    text-align: center;
+    margin: 6rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 5px;
+    width: 45%;
+    position: relative;
+    transition: all 0.4s ease-in-out;
+  }
+
+  .edit_form .cross {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s ease;
+    color: #333;
+  }
+
+  .edit_form .cross:hover {
+    color: red;
+  }

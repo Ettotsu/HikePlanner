@@ -52,54 +52,69 @@
 
 
         <main>
-        <div class="side">
-        <br>
-        <img src="./projet_css/if2.jpg"/>
-        <br>
-        <br>
-        <p>
-        </p>
-        <a href="profile.php">My profile</a>
-        </div>
+            <div class="side">
+                <br>
+                <img src="./projet_css/if2.jpg"/>
+                <br>
+                <br>
+                <p>
+                </p>
+                <a href="profile.php">My profile</a>
+            </div>
 
-        <div>
-        <?php 
-        
-        echo "<div> <form method='post'>
-            <input id='research' name='research' type='text'/>
-            <input type='submit' class='button' name='search' value='Search'/>
-            </form> </div> <br><br>";
+            <div>
+                <?php 
+                
+                echo "<div> <form method='post'>
+                    <input id='research' name='research' type='text'/>
+                    <input type='submit' class='button' name='search' value='Search'/>
+                    </form> </div> <br><br>";
 
-        function research() {  
-            $research = "%";          
-            $research .= $_POST["research"];
-            $research .= "%";
+                function research() {  
+                    $research = "%";          
+                    $research .= $_POST["research"];
+                    $research .= "%";
 
-            $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
-            $req = $bdd->prepare("SELECT * FROM account WHERE username LIKE ? AND id != ?;");
-            $req->execute([$research, $_SESSION['id_account']]);
-            
-            echo "<div>";
-            if ($research != "%%") {
-                foreach($req as $value) {
-                    $link = "profile_visit.php/?id=";
-                    $link .= $value["id"];
-                    echo "<a href='$link' >".$value['username'].'<br>'."</a>"; 
+                    $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
+                    $req = $bdd->prepare("SELECT * FROM account WHERE username LIKE ? AND id != ?;");
+                    $req->execute([$research, $_SESSION['id_account']]);
+                    
+                    echo "<div>";
+                    if ($research != "%%") {
+                        foreach($req as $value) {
+                            $link = "profile_visit.php/?id=";
+                            $link .= $value["id"];
+                            echo "<a href='$link' >".$value['username'].'<br>'."</a>"; 
+                        }
+                    }
+                    echo "</div>";
                 }
-            }
-            echo "</div>";
-        }
 
-        if(array_key_exists('search', $_POST)) {
-            research();
-        }
-        
-        ?>
-        </div>
+                if(array_key_exists('search', $_POST)) {
+                    research();
+                }
+                
+                ?>
+            </div>
+
+            <div>
+                <?php
+                    $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
+
+                    $req = $bdd->prepare("SELECT * FROM run_saved INNER JOIN follow ON run_saved.id_account = follow.id_followed WHERE follow.id_account = ?");
+                    $req->execute([$_SESSION['id_account']]);
+
+                    $run = $req->fetch();
+
+                    if($run != null) {
+                        echo $run["id_run"];
+                    }
+                ?>
+            </div>
         </main>
+
         <footer>
             <a href="./projet_css/if2.jpg">Privacy policy</a>
-        </footer>
-        
+        </footer>       
     </body>
 </html>

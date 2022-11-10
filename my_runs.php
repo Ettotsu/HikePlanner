@@ -100,10 +100,10 @@
                             </p>
                         </div>
                     </div>
-                    <a href= <?php echo"#edit_run".$run_id["number_run"]; ?>>Edit Run</a>
+                    <a href=<?php echo"#edit_run".$run_id["number_run"];?> >Edit Run</a>
                 </div>
 
-                <div id=<?php echo"edit_run".$run_id["number_run"]; ?> class="edit_run">
+                <div id=<?php echo"edit_run".$run_id["number_run"];?> class="edit_run">
                     <div class="edit">
                         <h2>Run</h2>
                         <form method="post" action="my_runs_edit.php">
@@ -145,7 +145,7 @@
                                 <h4> Comments </h4>
                                 <input class="comments" name="comments" type="text" placeholder="Enter your comments here !"/>
                             </div>
-                            <input name="number_run" type="hidden" value=<?php echo $run_id["number_run"]; ?> />
+                            <input name="number_run" type="hidden" value="<?php echo $run_id["number_run"];?>"/>
                             <input name="edit_run" type="submit" value="Edit"/>
                             <input type="submit" value="Delete Run"/>
                         </form>
