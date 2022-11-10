@@ -18,15 +18,19 @@
                 $req_run = $bdd->prepare("SELECT run_saved.id_run, run.distance, run.time FROM run_saved INNER JOIN run ON run_saved.id_run = run.id_run WHERE id_account = ? GROUP BY id_run");
                 $req_run->execute([$_SESSION['id_account']]);
 
-                $i = 0;
                 $run = $req_run->fetch();
 
-                while($run != null) {
+                if($run == null) {
+                    echo"You haven't planned a run yet";
+                } else {
 
-                    $req_marker = $bdd->prepare("SELECT latitude, longitude FROM waypoints WHERE id_run = ?");
-                    $req_marker->execute([$run["id_run"]]);
-                    
-                    $waypoint = $req_marker->fetch();
+                    $i = 0;
+                    while($run != null) {
+
+                        $req_marker = $bdd->prepare("SELECT latitude, longitude FROM waypoints WHERE id_run = ?");
+                        $req_marker->execute([$run["id_run"]]);
+                        
+                        $waypoint = $req_marker->fetch();
             ?>
 
             <div>
@@ -185,8 +189,9 @@
             </script>
 
             <?php
-                $i ++;
-                $run = $req_run->fetch();
+                    $i ++;
+                    $run = $req_run->fetch();
+                    }
                 }
             ?>
         </div>

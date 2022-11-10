@@ -10,7 +10,7 @@
         $comments = $_POST["comments"];
         $num_run = $_POST["number_run"];
 
-        if(array_key_exists("edit", $_POST)) {
+        if(array_key_exists("edit_run", $_POST)) {
             $req_edit_run = $bdd->prepare("UPDATE run_saved SET completed=?, date=?, time=?, difficulty=?,weather=?, comments=? WHERE number_run=?");         
             $req_edit_run->execute([$state, $date, $time, $difficulty, $weather, $comments, $num_run]);
         } else {

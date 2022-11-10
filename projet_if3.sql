@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 26 oct. 2022 à 14:08
+-- Généré le : jeu. 10 nov. 2022 à 19:34
 -- Version du serveur : 10.4.24-MariaDB
 -- Version de PHP : 8.1.6
 
@@ -32,6 +32,8 @@ CREATE TABLE `account` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
   `level` varchar(255) NOT NULL,
   `weight` int(11) NOT NULL,
   `size` int(11) NOT NULL
@@ -41,9 +43,9 @@ CREATE TABLE `account` (
 -- Déchargement des données de la table `account`
 --
 
-INSERT INTO `account` (`id`, `username`, `password`, `email`, `level`, `weight`, `size`) VALUES
-(1, 'Catherine', '12h06', 'catherine-de-midi-six@time.com', 'Débutant', 0, 0),
-(21, 'Drake', 'fff', 'babacooldu95@gmail.com', 'Intermediate', 400, 20);
+INSERT INTO `account` (`id`, `username`, `password`, `email`, `first_name`, `last_name`, `level`, `weight`, `size`) VALUES
+(1, 'Catherine', '12h06', 'catherine-de-midi-six@time.com', '', '', 'Débutant', 0, 0),
+(21, 'Drake', 'fff', 'babacooldu95@gmail.com', '', '', 'Intermediate', 400, 20);
 
 -- --------------------------------------------------------
 
@@ -64,19 +66,9 @@ CREATE TABLE `follow` (
 
 CREATE TABLE `run` (
   `id_run` int(11) NOT NULL,
-  `data` int(11) NOT NULL
+  `distance` float NOT NULL,
+  `time` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Déchargement des données de la table `run`
---
-
-INSERT INTO `run` (`id_run`, `data`) VALUES
-(3, 4),
-(4, 4),
-(5, 4),
-(6, 4),
-(7, 4);
 
 -- --------------------------------------------------------
 
@@ -85,6 +77,7 @@ INSERT INTO `run` (`id_run`, `data`) VALUES
 --
 
 CREATE TABLE `run_saved` (
+  `number_run` int(11) NOT NULL,
   `id_run` int(11) NOT NULL,
   `id_account` int(11) NOT NULL,
   `completed` tinyint(1) DEFAULT NULL,
@@ -104,21 +97,9 @@ CREATE TABLE `run_saved` (
 CREATE TABLE `waypoints` (
   `id_run` int(11) NOT NULL,
   `order_waypoint` int(11) NOT NULL,
-  `latitude` float NOT NULL,
-  `longitude` float NOT NULL
+  `latitude` decimal(10,6) NOT NULL,
+  `longitude` decimal(10,6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Déchargement des données de la table `waypoints`
---
-
-INSERT INTO `waypoints` (`id_run`, `order_waypoint`, `latitude`, `longitude`) VALUES
-(5, 1, 47.6397, 6.86385),
-(6, 1, 47.6397, 6.86385),
-(6, 2, 47.5102, 6.7982),
-(7, 1, 47.6397, 6.86385),
-(7, 2, 47.6085, 6.93237),
-(7, 3, 47.5102, 6.7982);
 
 --
 -- Index pour les tables déchargées
@@ -147,7 +128,7 @@ ALTER TABLE `run`
 -- Index pour la table `run_saved`
 --
 ALTER TABLE `run_saved`
-  ADD PRIMARY KEY (`id_run`,`id_account`),
+  ADD PRIMARY KEY (`number_run`),
   ADD KEY `id_run` (`id_run`,`id_account`),
   ADD KEY `id_account` (`id_account`);
 
@@ -165,13 +146,19 @@ ALTER TABLE `waypoints`
 -- AUTO_INCREMENT pour la table `account`
 --
 ALTER TABLE `account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT pour la table `run`
 --
 ALTER TABLE `run`
-  MODIFY `id_run` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_run` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT pour la table `run_saved`
+--
+ALTER TABLE `run_saved`
+  MODIFY `number_run` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- Contraintes pour les tables déchargées
