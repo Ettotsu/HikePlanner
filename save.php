@@ -5,8 +5,10 @@
         $lat = $_GET["lat"];
         $long = $_GET["lng"];
         $distance = $_GET["distance"];
-        $time = $_GET["time"];
+        $time = $_GET["time"]
         $new = 1;
+
+        for($i = 0; $i < count($time); $i++)
 
         $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
 
