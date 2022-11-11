@@ -21,6 +21,16 @@
             if(array_key_exists('curly', $_POST)) {
                 curly($bdd, $id);
             }
+
+            function runs_visit($id) {
+                $link = "http://localhost/HikePlanner/runs_visit.php/?id=".$id;
+            
+                header('Location: '.$link);
+            }
+    
+            if(array_key_exists('runs_visit', $_POST)) {
+                runs_visit($id);
+            }
             
             $req = $bdd->prepare("SELECT * FROM follow WHERE id_account = ?");
             $req->execute([$_SESSION['id_account']]);
@@ -34,7 +44,11 @@
 
             if ($followed != 1) {
                 echo "<form method='post'>
-                <input type='submit' class='button' name='curly' value='Suivre'/>
+                <input type='submit' class='button' name='curly' value='Follow'/>
+                </form> <br>";
+            } else {
+                echo "<form method='post'>
+                <input type='submit' class='button' name='runs_visit' value='View runs'/>
                 </form> <br>";
             }
            

@@ -97,8 +97,7 @@
                     echo "<div>";
                     if ($research != "%%") {
                         foreach($req as $value) {
-                            $link = "profile_visit.php/?id=";
-                            $link .= $value["id"];
+                            $link = "profile_visit.php/?id=".$value["id"];
                             echo "<a href='$link' >".$value['username'].'<br>'."</a>"; 
                         }
                     }
