@@ -1,7 +1,10 @@
 <html>
-    <link rel="stylesheet" type="text/css" href="./projet_css/homepage.css"/>
+    
     <meta charset="utf-8"/>
-
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
+    <link rel="stylesheet" type="text/css" href="projet_css/my_runs.css"/>
+    <link rel="stylesheet" type="text/css" href="./projet_css/homepage.css"/>
+    
     <head>
         <title>Hike Planner - Homepage</title>
     </head>
@@ -14,13 +17,26 @@
             header("Location: login.php");
         } 
 
+        $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
+
         function disconnect() {
             unset($_SESSION['id_account']);
             header("Location: login.php");
         }
 
+        function add_into_runs($bdd) {
+            $id_run = $_POST["id_run"];
+
+            $req_add = $bdd->prepare("INSERT INTO run_saved (id_run, id_account) VALUES (?, ?)");
+            $req_add->execute([$id_run, $_SESSION['id_account']]);
+        }
+
         if(array_key_exists('button', $_POST)) {
             disconnect();
+        }
+
+        if(array_key_exists("add_run", $_POST)) {
+            add_into_runs($bdd);
         }
         ?>
 
@@ -49,7 +65,6 @@
                     <input type='submit' class='button' name='button' value='Disconnect'>
             </form>
         <br>
-
 
         <main>
             <div class="side">
@@ -99,16 +114,128 @@
 
             <div>
                 <?php
-                    $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
-
-                    $req = $bdd->prepare("SELECT * FROM run_saved INNER JOIN follow ON run_saved.id_account = follow.id_followed WHERE follow.id_account = ?");
+                    $req = $bdd->prepare("SELECT run_saved.id_run, run.distance, run.time AS estimated_time, follow.* FROM run_saved 
+                                            INNER JOIN run ON run_saved.id_run = run.id_run 
+                                            INNER JOIN follow ON run_saved.id_account = follow.id_followed
+                                            WHERE follow.id_account = ? AND run_saved.completed = 1
+                                            GROUP BY run_saved.id_run
+                                            ORDER BY run_saved.date DESC");
                     $req->execute([$_SESSION['id_account']]);
 
-                    $run = $req->fetch();
+                    $parkour = $req->fetch();
+                    $i = 0;
 
-                    if($run != null) {
-                        echo $run["id_run"];
-                    }
+                    if($parkour != null) {
+                        while($parkour != null) {
+                ?>
+
+                <div>
+                    <div <?php echo "id='map".$i."'"; ?>>
+                        <!-- Here we will have the map -->
+                    </div>
+
+                    <div class="table_run">
+                        <h3> <?php echo "distance :".$parkour["distance"]."km time :".$parkour["estimated_time"]; ?> </h3>
+                        <table>
+                            <tr>
+                                <th></th>
+                                <th> Time </th>
+                                <th> Date </th>
+                                <th> Weather </th>
+                                <th> Difficulty </th>
+                                <th> Comments </th>
+                            </tr>
+                            
+                            <?php
+                                $req_run = $bdd->prepare("SELECT MIN(time), date, weather, difficulty, comments, username FROM run_saved 
+                                                            INNER JOIN follow ON run_saved.id_account = follow.id_followed
+                                                            INNER JOIN account ON follow.id_followed = account.id
+                                                            WHERE follow.id_account = ? AND id_run = ? AND completed = 1 
+                                                            GROUP BY run_saved.id_account");
+                                $req_run->execute([$_SESSION['id_account'], $parkour["id_run"]]);
+
+                                $run = $req_run->fetch();
+                                while($run != null) {
+                            ?>
+
+                            <tr>
+                                <td>
+                                    <?php
+                                        echo $run["username"];
+                                    ?>
+                                </td>
+                                <td> 
+                                    <?php
+                                        echo $run["MIN(time)"];
+                                    ?>
+                                </td>
+                                <td> 
+                                    <?php
+                                        echo $run["date"];
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                        echo $run["weather"];
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                        echo $run["difficulty"];
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                        echo $run["comments"];
+                                    ?>
+                                </td> 
+                            </tr>
+
+                            <?php $run = $req_run->fetch(); } ?>
+                        </table>
+                        <form method="post">
+                            <input name="id_run" type="hidden" value="<?php echo $parkour["id_run"]; ?>" />
+                            <input name="add_run" type="submit" value="Add to my Runs"/>
+                        </form>                                
+                    </div>
+
+                    <?php                  
+                        $req_marker = $bdd->prepare("SELECT latitude, longitude FROM waypoints WHERE id_run = ?");
+                        $req_marker->execute([$parkour["id_run"]]);
+
+                        $waypoint = $req_marker->fetch();
+                    ?>
+
+                    <!-- Javascript files -->
+                    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+                    <script type="text/javascript">
+                        
+                        // Create "my_map" and insert it in the HTML element with ID "map.$i"
+                        var <?php echo "my_map".$i; ?> = L.map('<?php echo "map".$i; ?>').setView([<?php echo $waypoint["latitude"].",".$waypoint["longitude"]; ?>], 7);
+                        
+                        // Set up Leaflet to use OpenStreetMap with Mapbox for routing
+                        L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+                            attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+                            minZoom: 1,
+                            maxZoom: 15
+                        }).addTo(<?php echo "my_map".$i; ?>);
+
+                        <?php
+                            while($waypoint != null) {
+                        ?>
+
+                        var marker = L.marker([<?php echo $waypoint["latitude"].",".$waypoint["longitude"]; ?>]).addTo(<?php echo "my_map".$i; ?>);
+
+                        <?php $waypoint = $req_marker->fetch(); } ?>
+                    </script>
+                </div>
+                <?php
+                        $parkour = $req->fetch();
+                        $i ++;
+                        }
+                    } else {
+                        echo "You aren't following someone yet";
+                    } 
                 ?>
             </div>
         </main>

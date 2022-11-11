@@ -175,10 +175,6 @@
                 }).addTo(<?php echo "my_map".$i; ?>);
 
                 <?php
-                    
-
-                    
-
                     while($waypoint != null) {
                 ?>
 

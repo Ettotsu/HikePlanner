@@ -1,3 +1,8 @@
+*[id^="map"]{
+    height:250px;
+    width: 800px;
+}
+
 header:not(button){
     text-align: center;
 }

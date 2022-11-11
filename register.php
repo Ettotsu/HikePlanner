@@ -38,7 +38,7 @@
             <br>
 
             <label for="height">Your height (in cm) :</label>
-            <input class="param" id="height" name="size" type="number" min="1" max="250"/>
+            <input class="param" id="height" name="height" type="number" min="1" max="250"/>
             <br>
 
 
