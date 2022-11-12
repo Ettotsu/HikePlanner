@@ -1,7 +1,9 @@
 <html>
-
-    <meta charset="utf-8"/>
-    <link rel="stylesheet" type="text/css" href="projet_css/profile.css"/>
+    <head>
+        <title>Hikeplanner - Profile</title>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" type="text/css" href="projet_css/profile.css"/>
+    </head>
 
     <body>
         <a href="#edit_profile">HikePlanner - Profile edit</a>
@@ -9,6 +11,10 @@
 
         <?php
             session_start();
+
+            if (isset($_SESSION['id_account']) == FALSE) {
+                header("Location: login.php");
+            }
 
             $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
 

@@ -11,6 +11,8 @@
                     width: 800px;
             }
         </style>
+
+        <title>Hikeplanner - Profile</title>
     </head>
 
     <body>
@@ -18,9 +20,15 @@
 
         <?php
             session_start();
-            $id = $_GET["id"];
             
+            if (isset($_SESSION['id_account']) == FALSE) {
+                header("Location: login.php");
+            }
+
             $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
+
+            $id = $_GET["id"];
+
             $req = $bdd->prepare("SELECT * FROM account WHERE id = ?");
             $req->execute([$id]);
 
@@ -31,14 +39,14 @@
                 $req->execute([$_SESSION['id_account'],$id]);
             }
     
-            if(array_key_exists('curly', $_POST)) {
-                curly($bdd, $id);
-            }
-
             function runs_visit($id) {
                 $link = "http://localhost/HikePlanner/runs_visit.php/?id=".$id;
             
                 header('Location: '.$link);
+            }
+            
+            if(array_key_exists('curly', $_POST)) {
+                curly($bdd, $id);
             }
     
             if(array_key_exists('runs_visit', $_POST)) {
@@ -208,7 +216,6 @@
                 // Create "my_map" and insert it in the HTML element with ID "map.$i"
                 var <?php echo "my_map".$i; ?> = L.map('<?php echo "map".$i; ?>').setView([<?php echo $waypoint["latitude"].",".$waypoint["longitude"]; ?>], 7);
 
-                // Set up Leaflet to use OpenStreetMap with Mapbox for routing
                 L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
                     attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
                     minZoom: 1,
@@ -231,7 +238,6 @@
                 }
             }
             ?>
-        </div>
-          
+        </div> 
     </body>
 </html>

@@ -1,5 +1,11 @@
 <html>
     <?php
+        session_start();
+
+        if (isset($_SESSION['id_account']) == FALSE) {
+            header("Location: login.php");
+        }
+
         $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
 
         $state = $_POST["state"];

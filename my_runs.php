@@ -1,11 +1,13 @@
 <html>
-    
-    <meta charset="utf-8"/>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
-    <link rel="stylesheet" type="text/css" href="projet_css/my_runs.css"/>
 
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
+        <link rel="stylesheet" type="text/css" href="projet_css/my_runs.css"/>
+        <title>Hikeplanner - My Runs</title>
+    </head>
+    
     <body>
-        
         <div>       
             <h2>
                 My Runs
@@ -13,9 +15,24 @@
             <?php
                 session_start();
 
+                if (isset($_SESSION['id_account']) == FALSE) {
+                    header("Location: login.php");
+                }
+
                 $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
 
-                $req_run = $bdd->prepare("SELECT run_saved.id_run, run.distance, run.time FROM run_saved INNER JOIN run ON run_saved.id_run = run.id_run WHERE id_account = ? GROUP BY id_run");
+                function add_run($bdd) {
+                    $id_run = $_POST["id_run"];
+
+                    $req_add_run = $bdd->prepare("INSERT INTO run_saved(id_run, id_account) VALUES (?,?)");
+                    $req_add_run->execute([$id_run, $_SESSION['id_account']]);
+                }
+
+                if(array_key_exists("add_run", $_POST)) {
+                    add_run($bdd);
+                }
+
+                $req_run = $bdd->prepare("SELECT run_saved.id_run, run.name, run.distance, run.time FROM run_saved INNER JOIN run ON run_saved.id_run = run.id_run WHERE id_account = ? GROUP BY id_run");
                 $req_run->execute([$_SESSION['id_account']]);
 
                 $run = $req_run->fetch();
@@ -32,11 +49,32 @@
                         
                         $waypoint = $req_marker->fetch();
             ?>
-
             <div>
-
                 <div <?php echo "id='map".$i."'"; ?>>
                     <!-- Here we will have the map -->
+                </div>
+
+                <div class="title_run">
+                    <h3> 
+                        Run :
+                        <?php
+                            if($run["name"] == null) {
+                                echo "Unnamed";
+                            } else {
+                                echo $run_id["name"];
+                            }
+                            echo "<br>distance :".$run["distance"]."km";
+                            $time = explode(":", $run["time"]);
+                            echo " time :";
+
+                            if($time[0] != 0) {
+                                echo $time[0]."h";
+                            }
+                            if($time[1] != 0) {
+                                echo $time[1]."min";
+                            }                     
+                        ?> 
+                    </h3>
                 </div>
 
                 <?php
@@ -49,7 +87,6 @@
                 ?>
 
                 <div class="table_run">
-                    <h3> <?php echo"Run :".$run_id["id_run"]." distance :".$run["distance"]."km time :".$run["time"]; ?> </h3>
                     <table>
                         <tr>
                             <th> State </th>
@@ -90,6 +127,7 @@
                             </td>
                         </tr>
                     </table>
+
                     <div>
                         <h4> Comments </h4>
                         <div class="comments">
@@ -100,6 +138,7 @@
                             </p>
                         </div>
                     </div>
+
                     <a href=<?php echo"#edit_run".$run_id["number_run"];?> >Edit Run</a>
                 </div>
 
@@ -145,10 +184,12 @@
                                 <h4> Comments </h4>
                                 <input class="comments" name="comments" type="text" placeholder="Enter your comments here !"/>
                             </div>
+
                             <input name="number_run" type="hidden" value="<?php echo $run_id["number_run"];?>"/>
                             <input name="edit_run" type="submit" value="Edit"/>
                             <input type="submit" value="Delete Run"/>
                         </form>
+
                         <a href="#" class="cross">&times;</a>
                     </div>
                 </div>
@@ -167,7 +208,6 @@
                 // Create "my_map" and insert it in the HTML element with ID "map.$i"
                 var <?php echo "my_map".$i; ?> = L.map('<?php echo "map".$i; ?>').setView([<?php echo $waypoint["latitude"].",".$waypoint["longitude"]; ?>], 7);
                 
-                // Set up Leaflet to use OpenStreetMap with Mapbox for routing
                 L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
                     attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
                     minZoom: 1,
@@ -183,6 +223,11 @@
                 <?php $waypoint = $req_marker->fetch(); } ?>
                 
             </script>
+
+            <form method="post">
+                <input name="id_run" type="hidden" value="<?php echo $run["id_run"]; ?>" />
+                <input name="add_run" type="submit" value="+ add run"/>
+            </form>
 
             <?php
                     $i ++;

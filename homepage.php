@@ -1,43 +1,40 @@
-<html>
-    
-    <meta charset="utf-8"/>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
-    <link rel="stylesheet" type="text/css" href="projet_css/my_runs.css"/>
-    <link rel="stylesheet" type="text/css" href="./projet_css/homepage.css"/>
-    
+<html> 
     <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
+        <link rel="stylesheet" type="text/css" href="./projet_css/homepage.css"/>
         <title>Hike Planner - Homepage</title>
     </head>
 
     <body>
         <?php
-        session_start();
+            session_start();
 
-        if (isset($_SESSION['id_account']) == FALSE) {
-            header("Location: login.php");
-        } 
+            if (isset($_SESSION['id_account']) == FALSE) {
+                header("Location: login.php");
+            } 
 
-        $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
+            $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
 
-        function disconnect() {
-            unset($_SESSION['id_account']);
-            header("Location: login.php");
-        }
+            function disconnect() {
+                unset($_SESSION['id_account']);
+                header("Location: login.php");
+            }
 
-        function add_into_runs($bdd) {
-            $id_run = $_POST["id_run"];
+            function add_into_runs($bdd) {
+                $id_run = $_POST["id_run"];
 
-            $req_add = $bdd->prepare("INSERT INTO run_saved (id_run, id_account) VALUES (?, ?)");
-            $req_add->execute([$id_run, $_SESSION['id_account']]);
-        }
+                $req_add = $bdd->prepare("INSERT INTO run_saved (id_run, id_account) VALUES (?, ?)");
+                $req_add->execute([$id_run, $_SESSION['id_account']]);
+            }
 
-        if(array_key_exists('button', $_POST)) {
-            disconnect();
-        }
+            if(array_key_exists('button', $_POST)) {
+                disconnect();
+            }
 
-        if(array_key_exists("add_run", $_POST)) {
-            add_into_runs($bdd);
-        }
+            if(array_key_exists("add_run", $_POST)) {
+                add_into_runs($bdd);
+            }
         ?>
 
         <header>
@@ -57,13 +54,12 @@
                         <a class="butt" href="my_runs.php">My Runs</a>
                     </li>
                 </ul>
-
             </nav>
         </header>
 
         <form class="deco" method='post'>
                     <input type='submit' class='button' name='button' value='Disconnect'>
-            </form>
+        </form>
         <br>
 
         <main>
@@ -78,19 +74,17 @@
             </div>
 
             <div>
-                <?php 
-                
+                <?php
                 echo "<div> <form method='post'>
                     <input id='research' name='research' type='text'/>
                     <input type='submit' class='button' name='search' value='Search'/>
                     </form> </div> <br><br>";
 
-                function research() {  
+                function research($bdd) {  
                     $research = "%";          
                     $research .= $_POST["research"];
                     $research .= "%";
 
-                    $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
                     $req = $bdd->prepare("SELECT * FROM account WHERE username LIKE ? AND id != ?;");
                     $req->execute([$research, $_SESSION['id_account']]);
                     
@@ -105,7 +99,7 @@
                 }
 
                 if(array_key_exists('search', $_POST)) {
-                    research();
+                    research($bdd);
                 }
                 
                 ?>
@@ -212,7 +206,6 @@
                         // Create "my_map" and insert it in the HTML element with ID "map.$i"
                         var <?php echo "my_map".$i; ?> = L.map('<?php echo "map".$i; ?>').setView([<?php echo $waypoint["latitude"].",".$waypoint["longitude"]; ?>], 7);
                         
-                        // Set up Leaflet to use OpenStreetMap with Mapbox for routing
                         L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
                             attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
                             minZoom: 1,
@@ -233,7 +226,7 @@
                         $i ++;
                         }
                     } else {
-                        echo "You aren't following someone yet";
+                        echo "None of the people you follow have scheduled a run yet.";
                     } 
                 ?>
             </div>
