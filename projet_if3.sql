@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 10 nov. 2022 à 19:34
--- Version du serveur : 10.4.24-MariaDB
--- Version de PHP : 8.1.6
+-- Généré le : sam. 12 nov. 2022 à 16:33
+-- Version du serveur : 10.4.25-MariaDB
+-- Version de PHP : 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,8 +35,8 @@ CREATE TABLE `account` (
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `level` varchar(255) NOT NULL,
-  `weight` int(11) NOT NULL,
-  `size` int(11) NOT NULL
+  `weight` int(11) DEFAULT NULL,
+  `size` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -45,7 +45,8 @@ CREATE TABLE `account` (
 
 INSERT INTO `account` (`id`, `username`, `password`, `email`, `first_name`, `last_name`, `level`, `weight`, `size`) VALUES
 (1, 'Catherine', '12h06', 'catherine-de-midi-six@time.com', '', '', 'Débutant', 0, 0),
-(21, 'Drake', 'fff', 'babacooldu95@gmail.com', '', '', 'Intermediate', 400, 20);
+(21, 'Drake', 'fff', 'babacooldu95@gmail.com', '', '', 'Intermediate', 400, 20),
+(22, 'Drakejuice', '5794', 'dgdgdg', '', '', 'Advanced', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -58,6 +59,14 @@ CREATE TABLE `follow` (
   `id_followed` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `follow`
+--
+
+INSERT INTO `follow` (`id_account`, `id_followed`) VALUES
+(1, 21),
+(1, 22);
+
 -- --------------------------------------------------------
 
 --
@@ -66,9 +75,19 @@ CREATE TABLE `follow` (
 
 CREATE TABLE `run` (
   `id_run` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
   `distance` float NOT NULL,
   `time` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `run`
+--
+
+INSERT INTO `run` (`id_run`, `name`, `distance`, `time`) VALUES
+(20, NULL, 3.4, '00:40:00'),
+(21, NULL, 3.2, '00:35:00'),
+(22, NULL, 5.6, '01:05:00');
 
 -- --------------------------------------------------------
 
@@ -88,6 +107,18 @@ CREATE TABLE `run_saved` (
   `comments` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `run_saved`
+--
+
+INSERT INTO `run_saved` (`number_run`, `id_run`, `id_account`, `completed`, `date`, `time`, `difficulty`, `weather`, `comments`) VALUES
+(29, 20, 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(30, 20, 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(31, 21, 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(32, 21, 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(33, 21, 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(34, 22, 1, NULL, NULL, NULL, NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -97,9 +128,21 @@ CREATE TABLE `run_saved` (
 CREATE TABLE `waypoints` (
   `id_run` int(11) NOT NULL,
   `order_waypoint` int(11) NOT NULL,
-  `latitude` decimal(10,6) NOT NULL,
-  `longitude` decimal(10,6) NOT NULL
+  `latitude` decimal(18,15) NOT NULL,
+  `longitude` decimal(18,15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `waypoints`
+--
+
+INSERT INTO `waypoints` (`id_run`, `order_waypoint`, `latitude`, `longitude`) VALUES
+(20, 1, '47.528213342701410', '6.821136474609376'),
+(20, 2, '47.510155100000000', '6.798201000000000'),
+(21, 1, '47.519867129220540', '6.825599670410157'),
+(21, 2, '47.510155100000000', '6.798201000000000'),
+(22, 1, '47.539803102962395', '6.848430633544923'),
+(22, 2, '47.510155100000000', '6.798201000000000');
 
 --
 -- Index pour les tables déchargées
@@ -146,19 +189,19 @@ ALTER TABLE `waypoints`
 -- AUTO_INCREMENT pour la table `account`
 --
 ALTER TABLE `account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT pour la table `run`
 --
 ALTER TABLE `run`
-  MODIFY `id_run` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id_run` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT pour la table `run_saved`
 --
 ALTER TABLE `run_saved`
-  MODIFY `number_run` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `number_run` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- Contraintes pour les tables déchargées
