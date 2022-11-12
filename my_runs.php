@@ -6,12 +6,31 @@
         <link rel="stylesheet" type="text/css" href="projet_css/my_runs.css"/>
         <title>Hikeplanner - My Runs</title>
     </head>
+
+    <header>
+		<img class="logo" src="./projet_css/HikePlanner.png"/>
+
+		<h1>My Runs</h1>
+
+		<nav>
+			<ul>
+				<li>
+					<a class="butt" href="homepage.php">Homepage</a>
+				</li>
+
+				<li>
+					<a class="butt" href="hikeplanner_map_v3.php">New Run</a>
+				</li>
+				
+				<li>
+					<a class="butt" href="my_runs.php">My Runs</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
     
     <body>
         <div>       
-            <h2>
-                My Runs
-            </h2>
             <?php
                 session_start();
 

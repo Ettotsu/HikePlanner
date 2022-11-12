@@ -40,6 +40,8 @@
         <header>
             <img class="logo" src="./projet_css/HikePlanner.png"/>
 
+            <h1>Homepage</h1>
+
             <nav>
                 <ul>
                     <li>

@@ -6,8 +6,31 @@
 		<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
 		<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
 		<link rel="stylesheet" type="text/css" href="./projet_css/map.css"/>
-        <title>Map</title>
+        <title>Hikeplanner - Map</title>
     </head>
+
+	<header>
+		<img class="logo" src="./projet_css/HikePlanner.png"/>
+
+		<h1>New Run</h1>
+
+		<nav>
+			<ul>
+				<li>
+					<a class="butt" href="homepage.php">Homepage</a>
+				</li>
+
+				<li>
+					<a class="butt" href="hikeplanner_map_v3.php">New Run</a>
+				</li>
+				
+				<li>
+					<a class="butt" href="my_runs.php">My Runs</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+
     <body>
 		<?php session_start() ?>
 
