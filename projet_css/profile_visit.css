@@ -1,0 +1,8 @@
+*[id^="map"]{
+    height:250px;
+    width: 800px;
+}
+
+body {
+    background-color: blue;
+}
