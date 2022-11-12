@@ -52,13 +52,13 @@ a.sign-up:hover{
 }
 
 .sign-in{
-    background-color: rgb(64, 137, 6);
+    background-color: rgb(49, 102, 7);
     color: white;
     border-radius: 7%;
     font-size: large;
 }
 .sign-in:hover{
-    background-color:blue;
+    background-color: rgb(23, 45, 5);
 }
 
 input{

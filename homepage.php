@@ -38,12 +38,14 @@
         ?>
 
         <header>
-            <img class="logo" src="./projet_css/HikePlanner.png"/>
+            <img class="logo" src="./projet_css/HikePlanner_homepage.png"/>
 
-            <h1>Homepage</h1>
 
             <nav>
+            <h1 class="h">Homepage</h1>
                 <ul>
+                    <br>
+                    <br>
                     <li>
                         <a class="butt" href="homepage.php">Homepage</a>
                     </li>
@@ -57,11 +59,11 @@
                     </li>
                 </ul>
             </nav>
-        </header>
-
-        <form class="deco" method='post'>
+            <form class="deco" method='post'>
                     <input type='submit' class='button' name='button' value='Disconnect'>
         </form>
+        </header>
+
         <br>
 
         <main>

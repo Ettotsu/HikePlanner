@@ -4,31 +4,34 @@
 }
 
 header{
-    background-color: #C0C0C0;
+    background-color: rgb(64, 137 , 6);
     border-radius: 6px;
     padding: 1%;
+    display: flex;
 }
 
 .deco{
     margin-left: auto;
-    position: fixed;
-    left: 95.5%;
 }
 
+img.logo{
+    max-width: 16%;
+    height: max-content;
+}
 nav{
+    margin-left: 100vh;
     text-align: center;
 }
-img.logo{
-    position: fixed;
-    max-width: 16%;
-    height: auto;
+
+.h{
+    color: white;
 }
 
 nav li{
     display: inline;
     padding: 10px;
-    background-color: rgb(64, 137 , 6);
-    margin-right: 20px;
+    background-color: rgb(49, 102, 7);
+    margin-right: 25px;
 }
 nav li:hover{
     background-color: rgb(23, 45, 5);
@@ -44,6 +47,7 @@ nav li:hover{
 .deco{
     text-align: right;
 }
+
 
 main{
     display: flex;
@@ -62,10 +66,4 @@ main{
 div.side a p{
     color: white;
     text-decoration: none;
-}
-
-
-
-footer{
-
 }
