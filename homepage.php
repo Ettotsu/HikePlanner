@@ -47,7 +47,7 @@
                     </li>
     
                     <li>
-                        <a class="butt" href="hikeplanner_map_v3.html">New Run</a>
+                        <a class="butt" href="hikeplanner_map_v3.php">New Run</a>
                     </li>
                     
                     <li>
