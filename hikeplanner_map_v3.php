@@ -111,6 +111,9 @@
 
 			function save() {
 				let link = localStorage.getItem('link');
+				link += '&name=';
+				link += document.getElementById("name").value;
+				// document.write(document.getElementById("name").value);
 				document.location.href = link;
 				return false;
 			}
@@ -118,7 +121,7 @@
 
 		<div id="name_run" class="overlay">
 			<div class="content">
-				<form method="post" action ="" onsubmit="return save();">
+				<form method="post" action="" onsubmit="return save();">
 					<label for="name"> Name for your run </label>
 					<input id="name" name="name" type="text" placeholder="Best run ever !"/>
 					<input name="run_name" type="submit" value="New run"/>
