@@ -38,21 +38,11 @@
                 $req = $bdd->prepare("INSERT INTO follow (id_account, id_followed) VALUES (?, ?);");
                 $req->execute([$_SESSION['id_account'],$id]);
             }
-    
-            function runs_visit($id) {
-                $link = "http://localhost/HikePlanner/runs_visit.php/?id=".$id;
-            
-                header('Location: '.$link);
-            }
             
             if(array_key_exists('curly', $_POST)) {
                 curly($bdd, $id);
             }
-    
-            if(array_key_exists('runs_visit', $_POST)) {
-                runs_visit($id);
-            }
-            
+      
             $req = $bdd->prepare("SELECT * FROM follow WHERE id_account = ?");
             $req->execute([$_SESSION['id_account']]);
 
@@ -67,11 +57,7 @@
                 echo "<form method='post'>
                 <input type='submit' class='button' name='curly' value='Follow'/>
                 </form> <br>";
-            } else {
-                echo "<form method='post'>
-                <input type='submit' class='button' name='runs_visit' value='View runs'/>
-                </form> <br>";
-            }
+            } 
            
         ?>
 
