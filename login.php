@@ -7,16 +7,18 @@
 
     <body>
         <page>
-            <!-- <?php 
-                if($id_account == -1) {
-                    echo "Username or Password invalid";
-                }
-            ?> -->
             <div class="logo">
                 <img src="./projet_css/HikePlanner.png"/>
             </div>
 
             <div class="formulaire">
+                <div class="error_connection">
+                    <?php 
+                        if(isset($_GET["error_connection"])) {
+                            echo "Username or Password invalid";
+                        }
+                    ?>
+                </div>
                 <form method="POST" action="login_2.php">
 
                     <label for="username">Username :</label>
