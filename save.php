@@ -7,9 +7,14 @@
         $distance = $_GET["distance"];
         $time_string = $_GET["time"];
         $new = 1;
-
+        
         $replace = array("h","min");
-        $time = str_replace($replace, ":", $time_string);
+        if(strlen($time_string) < 6) {
+            $time = "00:";
+            $time .= str_replace($replace, ":", $time_string);
+        } else {
+            $time = str_replace($replace, ":", $time_string);
+        }
         $time .= "00";
 
         $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
@@ -50,7 +55,6 @@
                 echo "id_run :".$id_run."<br>";
                 break;
             }
-
         }
 
         echo "nouveau :".$new."<br>";

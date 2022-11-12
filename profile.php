@@ -1,7 +1,9 @@
 <html>
-
-    <meta charset="utf-8"/>
-    <link rel="stylesheet" type="text/css" href="projet_css/profile.css"/>
+    <head>
+        <title>Hikeplanner - Profile</title>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" type="text/css" href="projet_css/profile.css"/>
+    </head>
 
     <body>
         <a href="#edit_profile">HikePlanner - Profile edit</a>

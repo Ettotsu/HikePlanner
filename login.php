@@ -1,18 +1,21 @@
 <html>
-    <head><title>Hikeplanner - Login</title></head>
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" type="text/css" href="./projet_css/login.css"/>
+        <title>Hikeplanner - Login</title>
+    </head>
 
     <body>
-    <link rel="stylesheet" type="text/css" href="./projet_css/login.css"/>
-
         <page>
-                    <!-- <?php 
-            if($id_account == -1) {
-                echo "Username or Password invalid";
-            }
-        ?> -->
+            <!-- <?php 
+                if($id_account == -1) {
+                    echo "Username or Password invalid";
+                }
+            ?> -->
             <div class="logo">
                 <img src="./projet_css/HikePlanner.png"/>
             </div>
+
             <div class="formulaire">
                 <form method="POST" action="login_2.php">
 
@@ -28,9 +31,10 @@
                     <a class="sign-up" href="register.php">Sign up</a>
                 </form>
             </div>
+
             <footer>
                 <a class="credit" href="https://www.pexels.com/photo/scenic-photo-of-forest-with-sunlight-1757363/" target="blank"><strong>Background credit</strong></a>
             </footer>
         </page>
-        </body>
+    </body>
 </html>
