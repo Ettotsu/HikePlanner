@@ -6,6 +6,7 @@
             header("Location: login.php");
         }
 
+        $name = str_replace("_", " ", $_GET["name"]);
         $lat = $_GET["lat"];
         $long = $_GET["lng"];
         $distance = $_GET["distance"];
@@ -25,6 +26,7 @@
 
         $size = count($lat);
 
+        echo "name :".$name."<br>";
         echo "taille :".$size."<br>";
         echo "distance :".$distance."<br>";
         echo "temps : ".$time."<br><br>";
@@ -65,8 +67,8 @@
         
         if($new == 1) {
 
-            $req = $bdd->prepare("INSERT INTO run (distance, time) VALUES (?, ?)");
-            $req->execute([$distance, $time]);
+            $req = $bdd->prepare("INSERT INTO run (name, distance, time) VALUES (?, ?, ?)");
+            $req->execute([$name, $distance, $time]);
 
             $req = $bdd->prepare("SELECT MAX(id_run) FROM run");
             $req->execute();

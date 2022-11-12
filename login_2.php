@@ -2,10 +2,6 @@
     <?php
         session_start();
 
-        if (isset($_SESSION['id_account']) == FALSE) {
-            header("Location: login.php");
-        }
-        
         $username = $_POST["username"];
         $password = $_POST["password"];
 
@@ -15,9 +11,7 @@
         $req->execute([$username, $password]);
         $result = $req->fetch();
 
-        
-
-        if($result == NULL) {
+        if($result == null) {
             $_SESSION['id_account'] = -1;
             header("Location: login.php");
 
