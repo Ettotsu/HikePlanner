@@ -9,6 +9,8 @@
         <title>Map</title>
     </head>
     <body>
+		<?php session_start() ?>
+
         <div id="map">
 	    <!-- Here we will have the map -->
 		</div>
@@ -112,8 +114,7 @@
 			function save() {
 				let link = localStorage.getItem('link');
 				link += '&name=';
-				link += document.getElementById("name").value;
-				// document.write(document.getElementById("name").value);
+				link += document.getElementById("name").value.replace(/ /i, '_');
 				document.location.href = link;
 				return false;
 			}
@@ -126,6 +127,7 @@
 					<input id="name" name="name" type="text" placeholder="Best run ever !"/>
 					<input name="run_name" type="submit" value="New run"/>
 				</form>
+				<a href="#" class="cross">&times;</a>
 			</div>
 		</div>
     </body>

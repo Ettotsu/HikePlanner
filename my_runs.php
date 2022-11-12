@@ -32,7 +32,11 @@
                     add_run($bdd);
                 }
 
-                $req_run = $bdd->prepare("SELECT run_saved.id_run, run.name, run.distance, run.time FROM run_saved INNER JOIN run ON run_saved.id_run = run.id_run WHERE id_account = ? GROUP BY id_run");
+                $req_run = $bdd->prepare("SELECT run_saved.id_run, run.name, run.distance, run.time FROM run_saved 
+                                            INNER JOIN run ON run_saved.id_run = run.id_run 
+                                            WHERE id_account = ? 
+                                            GROUP BY id_run
+                                            ORDER BY run_saved.number_run DESC");
                 $req_run->execute([$_SESSION['id_account']]);
 
                 $run = $req_run->fetch();
@@ -61,7 +65,7 @@
                             if($run["name"] == null) {
                                 echo "Unnamed";
                             } else {
-                                echo $run_id["name"];
+                                echo $run["name"];
                             }
                             echo "<br>distance :".$run["distance"]."km";
                             $time = explode(":", $run["time"]);
