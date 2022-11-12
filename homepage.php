@@ -226,7 +226,7 @@
                         $i ++;
                         }
                     } else {
-                        echo "You aren't following someone yet";
+                        echo "None of the people you follow have scheduled a run yet.";
                     } 
                 ?>
             </div>

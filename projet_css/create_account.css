@@ -41,6 +41,12 @@ form{
     border-radius: 5%;
 }
 
+.invalid {
+    position: absolute;
+    color: red;
+    font-size: 15px;
+}
+
 .sign-up{
     background-color: rgb(64, 137, 6);
     color: white;

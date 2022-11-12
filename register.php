@@ -1,8 +1,8 @@
 <html>
     <head>
         <meta charset="utf-8"/>
-        <title>Hikeplanner - Sign up</title>
         <link rel="stylesheet" type ="text/css" href="./projet_css/create_account.css"/>
+        <title>Hikeplanner - Sign up</title>
     </head>
 
     <body>
@@ -14,15 +14,25 @@
             <div class="formulaire">
                 <form method="POST" action="register_2.php">
                     <label for="email">Email address :</label>
-                    <input id="email" name="email" type="text" placeholder="example@mail.com"/>
+                    <input id="email" name="email" type="email" placeholder="example@mail.com"/>
                     <br>
 
                     <label for="username">Username :</label>
                     <input id="username" name="username" type="text" placeholder="Jus-de-dragon"/>
+                    <?php
+                        if(isset($_GET["invalid"])) {
+                            echo "<div class='invalid'> Invalid username</div>";
+                        }
+                    ?>
+                    <br>
+                    <br>
+                    
+                    <label for="first_name">First name :</label>
+                    <input id="first_name" name="first_name" type="text" placeholder="Catherine"/>
                     <br>
 
-                    <label for="password">Password :</label>
-                    <input id="password" name="password" type="password"/>
+                    <label for="last_name">Last name :</label>
+                    <input id="last_name" name="last_name" type="text" placeholder="De Médicis"/>
                     <br>
                     <br>
 
@@ -40,6 +50,12 @@
 
                     <label for="height">Your height (in cm) :</label>
                     <input class="param" id="height" name="height" type="number" min="1" max="250"/>
+                    <br>
+                    <br>
+                    
+                    <label for="password">Password :</label>
+                    <input id="password" name="password" type="password"/>
+                    <br>
                     <br>
 
 

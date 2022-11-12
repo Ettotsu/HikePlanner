@@ -2,6 +2,10 @@
     <?php
         session_start();
 
+        if (isset($_SESSION['id_account']) == FALSE) {
+            header("Location: login.php");
+        }
+
         $lat = $_GET["lat"];
         $long = $_GET["lng"];
         $distance = $_GET["distance"];

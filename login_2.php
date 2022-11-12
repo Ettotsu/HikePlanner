@@ -1,5 +1,11 @@
 <html>
-    <?php 
+    <?php
+        session_start();
+
+        if (isset($_SESSION['id_account']) == FALSE) {
+            header("Location: login.php");
+        }
+        
         $username = $_POST["username"];
         $password = $_POST["password"];
 
@@ -9,11 +15,11 @@
         $req->execute([$username, $password]);
         $result = $req->fetch();
 
-        session_start();
+        
 
         if($result == NULL) {
             $_SESSION['id_account'] = -1;
-            header("Location: login_1.php");
+            header("Location: login.php");
 
         } else {
             $_SESSION['id_account'] = $result["id"];
