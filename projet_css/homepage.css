@@ -3,20 +3,33 @@
     width: 800px;
 }
 
-header:not(button){
-    text-align: center;
+header:not(.deco){
+    background-color: rgb(64, 137 , 6);
+    border-radius: 6px;
+    padding: 1%;
+    display: flex;
+    align-items: center;
 }
 
 img.logo{
     max-width: 16%;
-    height: auto;
+    height: max-content;
+}
+
+nav{
+    text-align: center;
+    margin-left: 25%;
+}
+
+.h{
+    color: white;
 }
 
 nav li{
     display: inline;
     padding: 10px;
-    background-color: rgb(64, 137 , 6);
-    margin-right: 20px;
+    background-color: rgb(49, 102, 7);
+    margin-right: 25px;
 }
 nav li:hover{
     background-color: rgb(23, 45, 5);
@@ -31,10 +44,14 @@ nav li:hover{
 
 .deco{
     text-align: right;
+    margin-left: auto;
+
 }
+
 
 main{
     display: flex;
+
 }
 
 .side{
@@ -42,18 +59,23 @@ main{
     border-radius: 6px;
     float: left;
     text-align: center;
+    padding: 6px;
 }
 .side img{
     border-radius: 50%;
 }
-
-div.side a p{
+.side p{
     color: white;
-    text-decoration: none;
+}
+.side a{
+    color: white;
+    text-decoration: underline;
 }
 
+.se{
+    margin-left: 1%;
+}
 
-
-footer{
-
+.follow{
+    margin-left: 7%;
 }

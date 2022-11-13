@@ -12,8 +12,7 @@
         $result = $req->fetch();
 
         if($result == null) {
-            $_SESSION['id_account'] = -1;
-            header("Location: login.php");
+            header("Location: login.php?error_connection=1");
 
         } else {
             $_SESSION['id_account'] = $result["id"];

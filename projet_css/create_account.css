@@ -48,13 +48,13 @@ form{
 }
 
 .sign-up{
-    background-color: rgb(64, 137, 6);
+    background-color: rgb(49, 102, 7);
     color: white;
     border-radius: 7%;
     font-size: large;
 }
 .sign-up:hover{
-    background-color:blue;
+    background-color:rgb(23, 45, 5);
 }
 
 input{

@@ -38,10 +38,14 @@
         ?>
 
         <header>
-            <img class="logo" src="./projet_css/HikePlanner.png"/>
+            <img class="logo" src="./projet_css/HikePlanner_homepage.png"/>
+
 
             <nav>
+            <h1 class="h">Homepage</h1>
                 <ul>
+                    <br>
+                    <br>
                     <li>
                         <a class="butt" href="homepage.php">Homepage</a>
                     </li>
@@ -55,11 +59,11 @@
                     </li>
                 </ul>
             </nav>
-        </header>
-
-        <form class="deco" method='post'>
+            <form class="deco" method='post'>
                     <input type='submit' class='button' name='button' value='Disconnect'>
         </form>
+        </header>
+
         <br>
 
         <main>
@@ -69,11 +73,18 @@
                 <br>
                 <br>
                 <p>
+                <?php
+                $username=$bdd->prepare("SELECT username,  level, first_name, last_name FROM account WHERE id=?");
+                $username->execute([$_SESSION['id_account']]);
+                $var = $username->fetch();
+                echo $var["username"]."<br>".$var["first_name"]."  ".$var["last_name"]."<br>".$var["level"]
+                ?>
                 </p>
+                <br>
                 <a href="profile.php">My profile</a>
             </div>
 
-            <div>
+            <div class="se">
                 <?php
                 echo "<div> <form method='post'>
                     <input id='research' name='research' type='text'/>
@@ -105,7 +116,7 @@
                 ?>
             </div>
 
-            <div>
+            <div class="follow">
                 <?php
                     $req = $bdd->prepare("SELECT run_saved.id_run, run.distance, run.time AS estimated_time, follow.* FROM run_saved 
                                             INNER JOIN run ON run_saved.id_run = run.id_run 
