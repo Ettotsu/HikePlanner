@@ -106,7 +106,7 @@
 
         <div id="edit_profile" class="overlay">
             <div class="edit_form">
-                <form method="POST" action="profile_edit.php">
+                <form method="POST" action="profile_edit.php" enctype="multipart/form-data">
                     <label for="email">Email address :</label>
                     <input id="email" name="email" type="text" value="<?php echo $data["email"];?>" placeholder="example@mail.com"/>
                     <br>
@@ -139,7 +139,7 @@
                     <input id="image" name="image" type="file" accept="image/png, image/jpeg"/>
                     <br>
                     <br>
-                    
+
                     <input class="edit" type="submit" value="Validate"/>
                 </form>
                 <a href="#" class="cross">&times;</a>

@@ -74,7 +74,7 @@
                     $var = $username->fetch();
                 ?>
                 <br>
-                <img src="./projet_css/<?php echo $var['picture'];?>"/>
+                <img src="./profile_picture/<?php echo $var['picture'];?>"/>
                 <br>
                 <br>
                 <p>
