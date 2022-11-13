@@ -59,7 +59,7 @@
                 disconnect();
             }
         ?>
-
+        <br>
         <img class="pp" src="./profile_picture/<?php echo $data['picture']; ?>"/>
         <br>
 
