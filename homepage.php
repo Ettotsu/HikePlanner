@@ -26,6 +26,8 @@
 
                 $req_add = $bdd->prepare("INSERT INTO run_saved (id_run, id_account) VALUES (?, ?)");
                 $req_add->execute([$id_run, $_SESSION['id_account']]);
+
+                header("Location : my_runs.php");
             }
 
             if(array_key_exists('button', $_POST)) {
@@ -86,13 +88,13 @@
                 <br>
                 <p><strong>Following accounts : </strong>
                 <?php
-                    $req_follow = $bdd->prepare("SELECT username FROM account
+                    $req_follow = $bdd->prepare("SELECT username, picture FROM account
                                                     INNER JOIN follow ON account.id = follow.id_followed 
                                                     WHERE id_account = ?");
                     $req_follow->execute([$_SESSION['id_account']]);
                     foreach($req_follow as $value) {
                         if($value != null) {
-                            echo "<br>".$value["username"];
+                            echo "<br><img src='./profile_picture/".$value['picture']."'/>".$value["username"];
                         }
                     }
                 ?>
