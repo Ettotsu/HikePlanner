@@ -6,7 +6,7 @@
 		<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
 		<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
 		<link rel="stylesheet" type="text/css" href="./projet_css/map.css"/>
-        <title>Hikeplanner - Map</title>
+        <title>HikePlanner - Map</title>
     </head>
 
 	<header>

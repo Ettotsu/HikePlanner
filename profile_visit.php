@@ -12,7 +12,7 @@
             }
         </style>
 
-        <title>Hikeplanner - Profile</title>
+        <title>HikePlanner - Profile</title>
     </head>
 
     <body>

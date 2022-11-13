@@ -4,7 +4,7 @@
         <meta charset="utf-8"/>
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
         <link rel="stylesheet" type="text/css" href="projet_css/my_runs.css"/>
-        <title>Hikeplanner - My Runs</title>
+        <title>HikePlanner - My Runs</title>
     </head>
 
     <header>

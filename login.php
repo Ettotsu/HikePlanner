@@ -2,7 +2,7 @@
     <head>
         <meta charset="utf-8"/>
         <link rel="stylesheet" type="text/css" href="./projet_css/login.css"/>
-        <title>Hikeplanner - Login</title>
+        <title>HikePlanner - Login</title>
     </head>
 
     <body>

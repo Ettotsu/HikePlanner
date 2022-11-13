@@ -7,7 +7,7 @@
     </head>
 
     <body>
-        <a href="#edit_profile">HikePlanner - Profile edit</a>
+        <a href="#edit_profile">Edit your profile</a>
         <br>
 
         <?php

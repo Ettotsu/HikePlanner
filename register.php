@@ -2,7 +2,7 @@
     <head>
         <meta charset="utf-8"/>
         <link rel="stylesheet" type ="text/css" href="./projet_css/create_account.css"/>
-        <title>Hikeplanner - Sign up</title>
+        <title>HikePlanner - Sign up</title>
     </head>
 
     <body>
