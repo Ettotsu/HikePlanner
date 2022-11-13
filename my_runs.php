@@ -12,7 +12,6 @@
     <header>
             <img class="logo" src="./projet_css/HikePlanner_homepage.png"/>
 
-
             <nav>
             <h1 class="h">My runs</h1>
                 <ul>
@@ -31,21 +30,30 @@
                     </li>
                 </ul>
             </nav>
+            <?php
+             session_start();
+
+             if (isset($_SESSION['id_account']) == FALSE) {
+                 header("Location: login.php");
+             }
+
+             $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
+             function disconnect() {
+                unset($_SESSION['id_account']);
+                header("Location: login.php");
+            }
+            if(array_key_exists('button', $_POST)) {
+                disconnect();
+            }
+            ?>
             <form class="deco" method='post'>
-                    <input type='submit' class='decob' name='button' value='Disconnect'>
+                    <input type='submit' class='button' name='button' value='Disconnect'>
         </form>
     </header>
         <main>
+            <br>
                    
             <?php
-                session_start();
-
-                if (isset($_SESSION['id_account']) == FALSE) {
-                    header("Location: login.php");
-                }
-
-                $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
-
                 function add_run($bdd) {
                     $id_run = $_POST["id_run"];
 
@@ -92,9 +100,9 @@
                             } else {
                                 echo $run["name"];
                             }
-                            echo "<br>distance :".$run["distance"]."km";
+                            echo "<br>distance : ".$run["distance"]."km";
                             $time = explode(":", $run["time"]);
-                            echo " time :";
+                            echo " time : ";
 
                             if($time[0] != 0) {
                                 echo $time[0]."h";

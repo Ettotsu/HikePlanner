@@ -9,31 +9,50 @@
         <title>HikePlanner - Map</title>
     </head>
 
-	<header>
-		<img class="logo" src="./projet_css/HikePlanner.png"/>
-
-		<h1>New Run</h1>
-
-		<nav>
-			<ul>
-				<li>
-					<a class="butt" href="homepage.php">Homepage</a>
-				</li>
-
-				<li>
-					<a class="butt" href="hikeplanner_map_v3.php">New Run</a>
-				</li>
-				
-				<li>
-					<a class="butt" href="my_runs.php">My Runs</a>
-				</li>
-			</ul>
-		</nav>
-	</header>
-
     <body>
-		<?php session_start() ?>
 
+	<header>
+            <img class="logo" src="./projet_css/HikePlanner_homepage.png"/>
+
+            <nav>
+            <h1 class="h">New run</h1>
+                <ul>
+                    <br>
+                    <br>
+                    <li>
+                        <a class="butt" href="homepage.php">Homepage</a>
+                    </li>
+    
+                    <li>
+                        <a class="butt" href="hikeplanner_map_v3.php">New Run</a>
+                    </li>
+                    
+                    <li>
+                        <a class="butt" href="my_runs.php">My Runs</a>
+                    </li>
+                </ul>
+            </nav>
+            <?php
+             session_start();
+
+             if (isset($_SESSION['id_account']) == FALSE) {
+                 header("Location: login.php");
+             }
+
+             $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
+             function disconnect() {
+                unset($_SESSION['id_account']);
+                header("Location: login.php");
+            }
+            if(array_key_exists('button', $_POST)) {
+                disconnect();
+            }
+            ?>
+            <form class="deco" method='post'>
+                    <input type='submit' class='button' name='button' value='Disconnect'>
+        </form>
+    </header>
+			<br>
         <div id="map">
 	    <!-- Here we will have the map -->
 		</div>

@@ -1,3 +1,61 @@
+input[type="submit"]{
+  cursor:pointer;
+  color: white;
+  background-color: rgb(49, 102, 7);
+  border: none;
+  border-radius: 6px;
+  padding: 6px;
+}
+input[type="submit"]:hover{
+  background-color: rgb(23, 45, 5);
+
+}
+
+header:not(.deco){
+  background-color: rgb(64, 137 , 6);
+  border-radius: 6px;
+  padding: 1%;
+  display: flex;
+  align-items: center;
+}
+
+img.logo{
+  max-width: 16%;
+  height: max-content;
+}
+
+nav{
+  text-align: center;
+  margin-left: 25%;
+}
+
+.h{
+  color: white;
+}
+
+nav li{
+  display: inline;
+  padding: 10px;
+  background-color: rgb(49, 102, 7);
+  margin-right: 25px;
+}
+nav li:hover{
+  background-color: rgb(23, 45, 5);
+}
+.butt{
+  text-decoration: none;
+  color: white;
+}
+.butt:visited{
+  text-decoration: none;
+}
+.deco{
+  text-align: right;
+  margin-left: auto;
+  color: green;
+
+}
+
 #map{
     height:600px;
 }
