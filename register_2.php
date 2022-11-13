@@ -9,11 +9,12 @@
         $first_name = $_POST["first_name"];
         $last_name = $_POST["last_name"];
         $username = $_POST["username"];
-        $password = $_POST["password"];
         $email = $_POST["email"];
         $level = $_POST["level"];
         $weight = $_POST["weight"];
         $height = $_POST["height"];
+
+        $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
         
         $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
 
