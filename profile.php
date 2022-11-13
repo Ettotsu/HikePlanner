@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>Hikeplanner - Profile</title>
@@ -101,5 +102,163 @@
             </div>
         </div>
           
+        <?php
+        function convert($time) {  
+            $divided_time = explode(':', $time);
+            if(isset($divided_time[1]) == TRUE) {
+                return $divided_time[0] + $divided_time[1]/60 ;
+            } else {
+                return 0.00;
+            }
+        }
+
+        $req_data = $bdd -> prepare("SELECT run.name, run_saved.time, run.distance FROM run_saved INNER JOIN run ON run_saved.id_run = run.id_run 
+                                    WHERE id_account = ? AND completed = 1 AND run_saved.difficulty != '' ORDER BY run.name;");
+        $req_data -> execute([$_SESSION['id_account']]);
+     
+            echo "<br><br><table><tr><th> run </th>
+                <th> distance </th>
+                <th> time </th>
+                <th> speed </th>
+                </tr>";
+
+            foreach ($req_data as $value) {
+                echo "<tr>";
+
+                $run = $value['name'];
+                if ($run == NULL) {$run = "Unnamed run";}
+                echo "<td>".$run."</td>";
+
+                if ($value['distance'] != 0) {
+                $distance = $value['distance'];
+                echo "<td>".$distance." km</td>";
+                } else {
+                    echo "<td>Unspecified</td>";
+                }
+
+                if (convert($value['time']) != 0) {
+                    $time = convert($value['time']);
+                    echo "<td>".number_format($time, 2)." h</td>";
+                } else {
+                    echo "<td>Unspecified</td>";
+                }
+
+                if (convert($value['time']) != 0 && $value['distance'] != 0) {
+                    $speed = $distance / $time;
+                    echo "<td>".number_format($speed, 2)." km/h</td></tr>"; 
+                } else {
+                    echo "<td>Unspecified</td></tr>";  
+                }
+            }
+            echo "</table><br><br>";
+
+            $req_data = $bdd -> prepare("SELECT run_saved.time, run.time AS estimated_time, run.distance, run_saved.difficulty FROM run_saved INNER JOIN run ON run_saved.id_run = run.id_run 
+                                WHERE id_account = ? AND completed = 1 ORDER BY run_saved.difficulty ASC;");
+            $req_data -> execute([$_SESSION['id_account']]);
+            
+            $difficulty = "difficult"; //difficult - easy - hardcore - medium
+
+            $d_moy = 0;
+            $d_add = 0;
+            $d_max = 0;
+
+            $t_moy = 0;
+            $t_add = 0;
+            $t_max = 0;
+
+            $s_moy = 0;
+            $s_add = 0;
+            $s_max = 0;
+
+            echo "<table><tr>
+            <th> difficulty </th>
+            <th> number of runs </th>
+            <th> average distance </th>
+            <th> max distance </th>
+            <th> average time </th>
+            <th> max time </th>
+            <th> average speed </th>
+            <th> max speed </th>
+            </tr>";
+
+            while($difficulty != "over") {
+                $value = $req_data->fetch();
+                if(isset($value["difficulty"]) == TRUE && $value["difficulty"] == $difficulty) {
+
+                    if($value["distance"] != 0) {
+                        $distance = $value["distance"];
+                        $d_moy += $distance;
+                        $d_add += 1;
+                        $d_max = max($d_max, $distance);
+                    } 
+
+                    if(convert($value["time"]) != 0) {
+                        $time = convert($value["time"]);
+                        $t_moy += $time;
+                        $t_add += 1;
+                        $t_max = max($t_max, $time);
+                    } 
+
+                    if (convert($value['time']) != 0 && $value['distance'] != 0) {
+                        $speed = $distance / $time;
+                        $s_moy += $speed;
+                        $s_add += 1;
+                        $s_max = max($s_max, $speed);
+                        
+                    } 
+
+                } else {
+
+                    if ($d_add != 0) {
+                        $d_moy = $d_moy / $d_add;
+                    } else {
+                        $d_moy = 0;
+                    }
+                    if ($t_add != 0) {
+                        $t_moy = $t_moy / $t_add;
+                    } else {
+                        $t_moy = 0;
+                    }
+                    if ($s_add != 0) {
+                        $s_moy = $s_moy / $s_add;
+                    } else {
+                        $s_moy = 0;
+                    }
+
+                    echo "<tr>
+                    <td>".$difficulty."</td>
+                    <td>".$d_add."</td>
+                    <td>".number_format($d_moy,2)." km</td>
+                    <td>".number_format($d_max,2)." km</td>
+                    <td>".number_format($t_moy,2)." h</td>
+                    <td>".number_format($t_max,2)." h</td>
+                    <td>".number_format($s_moy,2)." km/h</td>
+                    <td>".number_format($s_max,2)." km/h</td></tr>";
+
+                    $d_moy = 0;
+                    $d_add = 0;
+                    $d_max = 0;
+                    $t_moy = 0;
+                    $t_add = 0;
+                    $t_max = 0;
+                    $s_moy = 0;
+                    $s_add = 0;
+                    $s_max = 0;
+
+                    if($difficulty == "difficult") {
+                        $difficulty = "easy";
+                    } else { 
+                        if($difficulty == "easy") {
+                            $difficulty = "hardcore";
+                    } else { 
+                        if($difficulty == "hardcore") {
+                            $difficulty = "medium";
+                    } else { $difficulty = "over";
+                    }}}
+
+                }
+            }
+        ?>
+
     </body>
 </html>
