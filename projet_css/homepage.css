@@ -17,7 +17,6 @@ input[type="submit"]:hover{
 }
 
 
-
 header:not(.deco){
     background-color: rgb(64, 137 , 6);
     border-radius: 6px;
@@ -56,7 +55,6 @@ nav li:hover{
 .butt:visited{
     text-decoration: none;
 }
-
 .deco{
     text-align: right;
     margin-left: auto;
