@@ -88,6 +88,14 @@ main{
     text-decoration: underline;
 }
 
+.pp{
+    max-width: 150px;
+}
+
+.pp_follow{
+    max-width: 20px;
+}
+
 .se{
     margin-left: 1%;
 }

@@ -46,6 +46,10 @@ nav li:hover{
     text-decoration: none;
 }
 
+.pp{
+    max-width: 150px;
+}
+
 .back{
     text-decoration: none;
     background-color: rgb(49, 102, 7);

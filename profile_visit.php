@@ -79,7 +79,7 @@
            
         ?>
 
-        <img src="../profile_picture/<?php echo $data['picture'];?>"/>
+        <img class="pp" src="../profile_picture/<?php echo $data['picture'];?>"/>
         <br>
 
         <label>Email adress : </label>

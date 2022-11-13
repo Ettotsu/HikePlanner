@@ -59,6 +59,10 @@ nav li:hover{
 
 }
 
+.pp{
+  max-width: 150px;
+}
+
 .edit{
   text-decoration: none;
   padding: 3px;

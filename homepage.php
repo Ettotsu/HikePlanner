@@ -76,7 +76,7 @@
                     $var = $username->fetch();
                 ?>
                 <br>
-                <img src="./profile_picture/<?php echo $var['picture'];?>"/>
+                <img class="pp" src="./profile_picture/<?php echo $var['picture'];?>"/>
                 <br>
                 <br>
                 <p>
@@ -94,7 +94,7 @@
                     $req_follow->execute([$_SESSION['id_account']]);
                     foreach($req_follow as $value) {
                         if($value != null) {
-                            echo "<br><img src='./profile_picture/".$value['picture']."'/>".$value["username"];
+                            echo "<br><img class='pp_follow' src='./profile_picture/".$value['picture']."'/>".$value["username"];
                         }
                     }
                 ?>
