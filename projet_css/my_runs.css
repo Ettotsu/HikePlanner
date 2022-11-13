@@ -62,9 +62,7 @@ nav li:hover{
 }
 
 main{
-  width: auto;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 33%;
 }
 
 table {

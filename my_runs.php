@@ -35,7 +35,8 @@
                     <input type='submit' class='decob' name='button' value='Disconnect'>
         </form>
     </header>
-        <main>       
+        <main>
+                   
             <?php
                 session_start();
 
