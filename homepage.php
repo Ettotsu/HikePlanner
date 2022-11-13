@@ -26,6 +26,8 @@
 
                 $req_add = $bdd->prepare("INSERT INTO run_saved (id_run, id_account) VALUES (?, ?)");
                 $req_add->execute([$id_run, $_SESSION['id_account']]);
+
+                header("Location : my_runs.php")
             }
 
             if(array_key_exists('button', $_POST)) {

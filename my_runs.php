@@ -9,51 +9,41 @@
 
     
     <body>
-    <header>
-            <img class="logo" src="./projet_css/HikePlanner_homepage.png"/>
+        <header>
+                <img class="logo" src="./projet_css/HikePlanner_homepage.png"/>
 
-            <nav>
-            <h1 class="h">My runs</h1>
-                <ul>
-                    <br>
-                    <br>
-                    <li>
-                        <a class="butt" href="homepage.php">Homepage</a>
-                    </li>
-    
-                    <li>
-                        <a class="butt" href="hikeplanner_map_v3.php">New Run</a>
-                    </li>
-                    
-                    <li>
-                        <a class="butt" href="my_runs.php">My Runs</a>
-                    </li>
-                </ul>
-            </nav>
-            <?php
-             session_start();
+                <nav>
+                <h1 class="h">My runs</h1>
+                    <ul>
+                        <br>
+                        <br>
+                        <li>
+                            <a class="butt" href="homepage.php">Homepage</a>
+                        </li>
+        
+                        <li>
+                            <a class="butt" href="hikeplanner_map_v3.php">New Run</a>
+                        </li>
+                        
+                        <li>
+                            <a class="butt" href="my_runs.php">My Runs</a>
+                        </li>
+                    </ul>
+                </nav>
+                <?php
+                session_start();
 
-             if (isset($_SESSION['id_account']) == FALSE) {
-                 header("Location: login.php");
-             }
+                if (isset($_SESSION['id_account']) == FALSE) {
+                    header("Location: login.php");
+                }
 
-             $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
-             function disconnect() {
-                unset($_SESSION['id_account']);
-                header("Location: login.php");
-            }
-            if(array_key_exists('button', $_POST)) {
-                disconnect();
-            }
-            ?>
-            <form class="deco" method='post'>
-                    <input type='submit' class='button' name='button' value='Disconnect'>
-        </form>
-    </header>
-        <main>
-            <br>
-                   
-            <?php
+                $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
+
+                function disconnect() {
+                    unset($_SESSION['id_account']);
+                    header("Location: login.php");
+                }
+                
                 function add_run($bdd) {
                     $id_run = $_POST["id_run"];
 
@@ -61,10 +51,23 @@
                     $req_add_run->execute([$id_run, $_SESSION['id_account']]);
                 }
 
+                if(array_key_exists('button', $_POST)) {
+                    disconnect();
+                }
+
                 if(array_key_exists("add_run", $_POST)) {
                     add_run($bdd);
                 }
 
+                ?>
+                <form class="deco" method='post'>
+                        <input type='submit' class='button' name='button' value='Disconnect'>
+                </form>
+        </header>
+        <main>
+            <br>
+                   
+            <?php
                 $req_run = $bdd->prepare("SELECT run_saved.id_run, run.name, run.distance, run.time FROM run_saved 
                                             INNER JOIN run ON run_saved.id_run = run.id_run 
                                             WHERE id_account = ? 
@@ -115,7 +118,7 @@
                 </div>
 
                 <?php
-                    $req_run_id = $bdd->prepare("SELECT * FROM `run_saved` WHERE id_account = ? AND id_run = ? ORDER BY time ASC");
+                    $req_run_id = $bdd->prepare("SELECT * FROM `run_saved` WHERE id_account = ? AND id_run = ? ORDER BY time IS NULL, time ASC");
                     $req_run_id->execute([$_SESSION['id_account'], $run["id_run"]]);
 
                     $run_id = $req_run_id->fetch();
@@ -178,6 +181,7 @@
 
                     <a href=<?php echo"#edit_run".$run_id["number_run"];?> >Edit run</a>
                 </div>
+                <br>
 
                 <div id=<?php echo"edit_run".$run_id["number_run"];?> class="edit_run">
                     <div class="edit">
