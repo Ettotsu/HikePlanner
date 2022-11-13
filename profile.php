@@ -162,7 +162,7 @@
         $req1 = $req_data->fetch();
 
         if (isset($req1['name']) == TRUE) {
-            echo "<br><br><table><tr><th> run </th>
+            echo "<br><br><br>My runs : <br><br><table><tr><th> run </th>
                 <th> distance </th>
                 <th> time </th>
                 <th> speed </th>
@@ -243,7 +243,7 @@
             $s_add = 0;
             $s_max = 0;
 
-            echo "<table><tr>
+            echo "Difficulty statistics :<br><br><table><tr>
             <th> difficulty </th>
             <th> number of runs </th>
             <th> average distance </th>
