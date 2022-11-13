@@ -4,7 +4,7 @@ html{
 
 *[id^="map"]{
     height:250px;
-    width: 700px;
+    width: 920px;
 }
 
 input[type="submit"]{
@@ -80,14 +80,14 @@ td {
     border-width:1px;
     border-style:solid; 
     border-color:black;
-    width: 8rem;
+    width: 10rem;
 }
 
 .comments {
     border-width:1px;
     border-style:solid; 
     border-color:black;
-    width: 41rem;
+    width: 51rem;
     height: 4rem;
 }
 
