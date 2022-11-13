@@ -15,8 +15,22 @@
         $weight = $_POST["weight"];
         $height = $_POST["height"];
 
-        $req = $bdd->prepare("UPDATE account SET email = ?, first_name = ?, last_name = ?, level = ?, weight = ?, size = ? WHERE id = ?");
-        $req->execute([$email, $first_name, $last_name, $level, $weight, $height, $_SESSION['id_account']]);
+        if($_FILES["image"]["name"] != null) {
+
+            $origin = $_FILES["image"]["tmp_name"];
+            $destination = 'profile_picture/'.$_FILES["image"]["name"];
+            move_uploaded_file($origin, $destination);
+
+            $image = $_FILES["image"]["name"];
+        } else {
+            $req_image = $bdd->prepare("SELECT picture FROM account WHERE id = ?");
+            $req_image->execute([$_SESSION['id_account']]);
+
+            $image =  $req_image->fetch()["picture"];
+        }
+
+        $req = $bdd->prepare("UPDATE account SET email = ?, first_name = ?, last_name = ?, level = ?, weight = ?, size = ?, picture = ? WHERE id = ?");
+        $req->execute([$email, $first_name, $last_name, $level, $weight, $height, $image, $_SESSION['id_account']]);
 
         header("Location: profile.php");
     ?>

@@ -68,16 +68,18 @@
 
         <main>
             <div class="side">
+                <?php
+                    $username=$bdd->prepare("SELECT username,  level, first_name, last_name, picture FROM account WHERE id=?");
+                    $username->execute([$_SESSION['id_account']]);
+                    $var = $username->fetch();
+                ?>
                 <br>
-                <img src="./projet_css/if2.jpg"/>
+                <img src="./projet_css/<?php echo $var['picture'];?>"/>
                 <br>
                 <br>
                 <p>
                 <?php
-                $username=$bdd->prepare("SELECT username,  level, first_name, last_name FROM account WHERE id=?");
-                $username->execute([$_SESSION['id_account']]);
-                $var = $username->fetch();
-                echo $var["username"]."<br>".$var["first_name"]."  ".$var["last_name"]."<br>".$var["level"];
+                    echo $var["username"]."<br>".$var["first_name"]."  ".$var["last_name"]."<br>".$var["level"];
                 ?>
                 </p>
                 <a href="profile.php">View my profile</a>

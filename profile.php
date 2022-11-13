@@ -60,6 +60,7 @@
             }
         ?>
 
+        <img src="./profile_picture/<?php echo $data['picture']; ?>"/>
         <br>
 
         <label>Email adress : </label>
@@ -133,7 +134,12 @@
                     <label for="height">Your height (in cm) :</label>
                     <input class="param" id="height" name="height" type="number" value="<?php echo $data["size"];?>"  min="1" max="250"/>
                     <br>
+
+                    <label for="image">Profile picture :</label>
+                    <input id="image" name="image" type="file" accept="image/png, image/jpeg"/>
                     <br>
+                    <br>
+                    
                     <input class="edit" type="submit" value="Validate"/>
                 </form>
                 <a href="#" class="cross">&times;</a>
