@@ -77,11 +77,26 @@
                 $username=$bdd->prepare("SELECT username,  level, first_name, last_name FROM account WHERE id=?");
                 $username->execute([$_SESSION['id_account']]);
                 $var = $username->fetch();
-                echo $var["username"]."<br>".$var["first_name"]."  ".$var["last_name"]."<br>".$var["level"]
+                echo $var["username"]."<br>".$var["first_name"]."  ".$var["last_name"]."<br>".$var["level"];
                 ?>
                 </p>
                 <br>
                 <a href="profile.php">My profile</a>
+            </div>
+
+            <div>
+                <?php
+                    $req_follow = $bdd->prepare("SELECT username FROM account
+                                                    INNER JOIN follow ON account.id = follow.id_followed 
+                                                    WHERE id_account = ?");
+                    $req_follow->execute([$_SESSION['id_account']]);
+
+                    foreach($req_follow as $value) {
+                        if($value != null) {
+                            echo "<div>".$value["username"]."</div>";
+                        }
+                    }
+                ?>
             </div>
 
             <div class="se">
@@ -237,7 +252,7 @@
                         $i ++;
                         }
                     } else {
-                        echo "None of the people you follow have scheduled a run yet.";
+                        echo "<em>None of the people you follow have scheduled a run yet.</em>";
                     } 
                 ?>
             </div>
