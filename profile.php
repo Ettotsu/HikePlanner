@@ -156,12 +156,12 @@
             }
         }
 
-        $req_data = $bdd -> prepare("SELECT run.name, run_saved.time, run.distance FROM run_saved INNER JOIN run ON run_saved.id_run = run.id_run 
-                                    WHERE id_account = ? AND completed = 1 AND run_saved.difficulty != '' ORDER BY run.name;");
+        $req_data = $bdd -> prepare("SELECT run_saved.run_name, run_saved.time, run.distance FROM run_saved INNER JOIN run ON run_saved.id_run = run.id_run 
+                                    WHERE id_account = ? AND completed = 1 AND run_saved.difficulty != '' ORDER BY run_saved.run_name;");
         $req_data -> execute([$_SESSION['id_account']]);
         $req1 = $req_data->fetch();
 
-        if (isset($req1['name']) == TRUE) {
+        if (isset($req1['distance']) == TRUE) {
             echo "<br><br><br>My runs : <br><br><table><tr><th> run </th>
                 <th> distance </th>
                 <th> time </th>
@@ -170,7 +170,7 @@
 
                 echo "<tr>";
 
-                $run = $req1['name'];
+                $run = $req1['run_name'];
                 if ($run == NULL) {$run = "Unnamed run";}
                 echo "<td>".$run."</td>";
 
@@ -198,7 +198,7 @@
             foreach ($req_data as $value) {
                 echo "<tr>";
 
-                $run = $value['name'];
+                $run = $value['run_name'];
                 if ($run == NULL) {$run = "Unnamed run";}
                 echo "<td>".$run."</td>";
 

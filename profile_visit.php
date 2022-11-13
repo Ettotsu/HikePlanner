@@ -127,7 +127,7 @@
             <h2>Runs :</h2>
 
             <?php
-                $req_run = $bdd->prepare("SELECT run_saved.id_run, run.distance, run.time FROM run_saved 
+                $req_run = $bdd->prepare("SELECT run_saved.run_name, run_saved.id_run, run.distance, run.time FROM run_saved 
                                             INNER JOIN run ON run_saved.id_run = run.id_run 
                                             WHERE id_account = ? AND completed = 1
                                             GROUP BY id_run
@@ -160,7 +160,7 @@
                 ?>
 
                 <div class="table_run">
-                    <h3> <?php echo"Run :".$run_id["id_run"]." distance :".$run["distance"]."km time :".$run["time"]; ?> </h3>
+                    <h3> <?php echo"Run :".$run_id["run_name"]." distance :".$run["distance"]."km time :".$run["time"]; ?> </h3>
                     <table>
                         <tr>
                             <th> Time </th>
