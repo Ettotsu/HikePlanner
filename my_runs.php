@@ -166,7 +166,7 @@
                     </table>
 
                     <div>
-                        <h4> Comments </h4>
+                        <h4> Comments :</h4>
                         <div class="comments">
                             <p>
                                 <?php
@@ -176,7 +176,7 @@
                         </div>
                     </div>
 
-                    <a href=<?php echo"#edit_run".$run_id["number_run"];?> >Edit Run</a>
+                    <a href=<?php echo"#edit_run".$run_id["number_run"];?> >Edit run</a>
                 </div>
 
                 <div id=<?php echo"edit_run".$run_id["number_run"];?> class="edit_run">
@@ -218,8 +218,8 @@
                                 </tr>
                             </table>
                             <div>
-                                <h4> Comments </h4>
-                                <input class="comments" name="comments" type="text" placeholder="Enter your comments here !"/>
+                                <h4> Comments :</h4>
+                                <input class="comments" name="comments" type="text" placeholder="Enter your comments here!"/>
                             </div>
 
                             <input name="number_run" type="hidden" value="<?php echo $run_id["number_run"];?>"/>

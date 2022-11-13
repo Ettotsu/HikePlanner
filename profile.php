@@ -7,7 +7,34 @@
     </head>
 
     <body>
-        <a href="#edit_profile">Edit your profile</a>
+    <header>
+            <img class="logo" src="./projet_css/HikePlanner_homepage.png"/>
+
+
+            <nav>
+            <h1 class="h">My profile</h1>
+                <ul>
+                    <br>
+                    <br>
+                    <li>
+                        <a class="butt" href="homepage.php">Homepage</a>
+                    </li>
+    
+                    <li>
+                        <a class="butt" href="hikeplanner_map_v3.php">New Run</a>
+                    </li>
+                    
+                    <li>
+                        <a class="butt" href="my_runs.php">My Runs</a>
+                    </li>
+                </ul>
+            </nav>
+            <form class="deco" method='post'>
+                    <input type='submit' class='button' name='button' value='Disconnect'>
+        </form>
+        </header>
+        <br>
+        <a href="#edit_profile" class="edit">Edit your profile</a>
         <br>
 
         <?php
@@ -23,7 +50,17 @@
             $req->execute([$_SESSION['id_account']]);
 
             $data = $req->fetch();
+
+            function disconnect() {
+                unset($_SESSION['id_account']);
+                header("Location: login.php");
+            }
+            if(array_key_exists('button', $_POST)) {
+                disconnect();
+            }
         ?>
+
+        <br>
 
         <label>Email adress : </label>
         <?php
@@ -96,7 +133,8 @@
                     <label for="height">Your height (in cm) :</label>
                     <input class="param" id="height" name="height" type="number" value="<?php echo $data["size"];?>"  min="1" max="250"/>
                     <br>
-                    <input class="edit" type="submit" value="Edit Profile"/>
+                    <br>
+                    <input class="edit" type="submit" value="Validate"/>
                 </form>
                 <a href="#" class="cross">&times;</a>
             </div>

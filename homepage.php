@@ -88,7 +88,6 @@
                                                     INNER JOIN follow ON account.id = follow.id_followed 
                                                     WHERE id_account = ?");
                     $req_follow->execute([$_SESSION['id_account']]);
-
                     foreach($req_follow as $value) {
                         if($value != null) {
                             echo "<br>".$value["username"];
