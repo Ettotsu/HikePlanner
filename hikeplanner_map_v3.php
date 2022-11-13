@@ -122,7 +122,7 @@
 					console.log(saveUrl);
 
 
-					// document.write("<div id='name_run' class='overlay'> <div class='content'> <form method='post'> <label for='name'>Name for your run</label>	<input id='name' name='name' type='text' placeholder='Best run ever !'/> <input name='run_name' type='submit' value='New run'/>	</form>	<a href='save.php' class='cross'>&times;</a> </div> </div>");
+					// document.write("<div id='name_run' class='overlay'> <div class='content'> <form method='post'> <label for='name'>Name for your run : </label>	<input id='name' name='name' type='text' placeholder='Best run ever!'/> <input name='run_name' type='submit' value='New run'/>	</form>	<a href='save.php' class='cross'>&times;</a> </div> </div>");
 					
 					document.location.href = "#name_run";
 					// document.location.href = saveUrl;
@@ -146,8 +146,8 @@
 		<div id="name_run" class="overlay">
 			<div class="content">
 				<form method="post" action="" onsubmit="return save();">
-					<label for="name"> Name for your run </label>
-					<input id="name" name="name" type="text" placeholder="Best run ever !"/>
+					<label for="name"> Name for your run : </label>
+					<input id="name" name="name" type="text" placeholder="Best run ever!"/>
 					<input name="run_name" type="submit" value="New run"/>
 				</form>
 				<a href="#" class="cross">&times;</a>

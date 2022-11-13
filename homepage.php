@@ -77,7 +77,7 @@
                 <a href="profile.php">My profile</a>
             </div>
 
-            <div>
+            <div class="se">
                 <?php
                 echo "<div> <form method='post'>
                     <input id='research' name='research' type='text'/>
@@ -109,7 +109,7 @@
                 ?>
             </div>
 
-            <div>
+            <div class="follow">
                 <?php
                     $req = $bdd->prepare("SELECT run_saved.id_run, run.distance, run.time AS estimated_time, follow.* FROM run_saved 
                                             INNER JOIN run ON run_saved.id_run = run.id_run 
