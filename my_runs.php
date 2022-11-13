@@ -68,7 +68,7 @@
             <br>
                    
             <?php
-                $req_run = $bdd->prepare("SELECT run_saved.id_run, run.name, run.distance, run.time FROM run_saved 
+                $req_run = $bdd->prepare("SELECT run_saved.id_run, run_saved.run_name, run.distance, run.time FROM run_saved 
                                             INNER JOIN run ON run_saved.id_run = run.id_run 
                                             WHERE id_account = ? 
                                             GROUP BY id_run
@@ -98,10 +98,10 @@
                     <h3> 
                         Run :
                         <?php
-                            if($run["name"] == null) {
+                            if($run["run_name"] == null) {
                                 echo "Unnamed";
                             } else {
-                                echo $run["name"];
+                                echo $run["run_name"];
                             }
                             echo "<br>distance : ".$run["distance"]."km";
                             $time = explode(":", $run["time"]);

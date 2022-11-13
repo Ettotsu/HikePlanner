@@ -67,8 +67,8 @@
         
         if($new == 1) {
 
-            $req = $bdd->prepare("INSERT INTO run (name, distance, time) VALUES (?, ?, ?)");
-            $req->execute([$name, $distance, $time]);
+            $req = $bdd->prepare("INSERT INTO run (distance, time) VALUES (?, ?)");
+            $req->execute([$distance, $time]);
 
             $req = $bdd->prepare("SELECT MAX(id_run) FROM run");
             $req->execute();
@@ -81,8 +81,8 @@
             }
         }
 
-        $req = $bdd->prepare("INSERT INTO run_saved (id_account, id_run) VALUES (?, ?)");
-        $req->execute([$_SESSION['id_account'], $id_run]);
+        $req = $bdd->prepare("INSERT INTO run_saved (id_account, id_run, run_name) VALUES (?, ?, ?)");
+        $req->execute([$_SESSION['id_account'], $id_run, $name]);
         
         header("Location: my_runs.php");                
     ?>
