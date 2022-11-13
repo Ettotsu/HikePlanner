@@ -159,12 +159,41 @@
         $req_data = $bdd -> prepare("SELECT run.name, run_saved.time, run.distance FROM run_saved INNER JOIN run ON run_saved.id_run = run.id_run 
                                     WHERE id_account = ? AND completed = 1 AND run_saved.difficulty != '' ORDER BY run.name;");
         $req_data -> execute([$_SESSION['id_account']]);
-     
+        $req1 = $req_data->fetch();
+
+        if (isset($req1['name']) == TRUE) {
             echo "<br><br><table><tr><th> run </th>
                 <th> distance </th>
                 <th> time </th>
                 <th> speed </th>
                 </tr>";
+
+                echo "<tr>";
+
+                $run = $req1['name'];
+                if ($run == NULL) {$run = "Unnamed run";}
+                echo "<td>".$run."</td>";
+
+                if ($req1['distance'] != 0) {
+                $distance = $req1['distance'];
+                echo "<td>".$distance." km</td>";
+                } else {
+                    echo "<td>Unspecified</td>";
+                }
+
+                if (convert($req1['time']) != 0) {
+                    $time = convert($req1['time']);
+                    echo "<td>".number_format($time, 2)." h</td>";
+                } else {
+                    echo "<td>Unspecified</td>";
+                }
+
+                if (convert($req1['time']) != 0 && $req1['distance'] != 0) {
+                    $speed = $distance / $time;
+                    echo "<td>".number_format($speed, 2)." km/h</td></tr>"; 
+                } else {
+                    echo "<td>Unspecified</td></tr>";  
+                }    
 
             foreach ($req_data as $value) {
                 echo "<tr>";
@@ -199,7 +228,7 @@
             $req_data = $bdd -> prepare("SELECT run_saved.time, run.time AS estimated_time, run.distance, run_saved.difficulty FROM run_saved INNER JOIN run ON run_saved.id_run = run.id_run 
                                 WHERE id_account = ? AND completed = 1 ORDER BY run_saved.difficulty ASC;");
             $req_data -> execute([$_SESSION['id_account']]);
-            
+
             $difficulty = "difficult"; //difficult - easy - hardcore - medium
 
             $d_moy = 0;
@@ -225,8 +254,9 @@
             <th> max speed </th>
             </tr>";
 
+            $value = $req_data->fetch();
             while($difficulty != "over") {
-                $value = $req_data->fetch();
+
                 if(isset($value["difficulty"]) == TRUE && $value["difficulty"] == $difficulty) {
 
                     if($value["distance"] != 0) {
@@ -250,6 +280,8 @@
                         $s_max = max($s_max, $speed);
                         
                     } 
+
+                    $value = $req_data->fetch();
 
                 } else {
 
@@ -302,6 +334,7 @@
 
                 }
             }
+        } else {echo "<br><br>You have no runs recorded yet.";}    
         ?>
 
     </body>
