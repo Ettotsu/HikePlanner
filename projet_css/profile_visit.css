@@ -3,6 +3,53 @@
     width: 800px;
 }
 
-body {
-    background-color: blue;
+header{
+    background-color: rgb(64, 137 , 6);
+    border-radius: 6px;
+    padding: 1%;
+    display: flex;
+    align-items: center;
+}
+
+img.logo{
+    max-width: 16%;
+    height: max-content;
+}
+
+nav{
+    text-align: center;
+    margin-left: 25%;
+}
+
+.h{
+    color: white;
+}
+
+nav li{
+    display: inline;
+    padding: 10px;
+    background-color: rgb(49, 102, 7);
+    margin-right: 25px;
+}
+nav li:hover{
+    background-color: rgb(23, 45, 5);
+}
+.butt{
+    text-decoration: none;
+    color: white;
+}
+.butt:visited{
+    text-decoration: none;
+}
+
+.back{
+    text-decoration: none;
+    background-color: rgb(49, 102, 7);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+
+}
+.back:hover{
+    background-color: rgb(23, 45, 5);
 }

@@ -3,7 +3,7 @@
         <meta charset="utf-8"/>
         
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
-        <link rel="stylesheet" type="text/css" href="./projet_css/profile_visit.css"/>
+        <link rel="stylesheet" type="text/css" href="../projet_css/profile_visit.css"/>
 
         <style type="text/css">
             *[id^="map"]{
@@ -16,16 +16,41 @@
     </head>
 
     <body>
-        <a href='http://localhost/HikePlanner/homepage.php'> retour </a> <br><br>
+
+    <header>
+            <img class="logo" src="../projet_css/HikePlanner_homepage.png"/>
+
+            <nav>
+            <h1 class="h">View profile</h1>
+                <ul>
+                    <br>
+                    <br>
+                    <li>
+                        <a class="butt" href="../homepage.php">Homepage</a>
+                    </li>
+    
+                    <li>
+                        <a class="butt" href="../hikeplanner_map_v3.php">New Run</a>
+                    </li>
+                    
+                    <li>
+                        <a class="butt" href="../my_runs.php">My Runs</a>
+                    </li>
+                </ul>
+            </nav>
+            </header>
+            <br>
+    <a class="back" href='http://localhost/HikePlanner/homepage.php'>Back</a> <br><br>
+
 
         <?php
             session_start();
-            
             if (isset($_SESSION['id_account']) == FALSE) {
-                header("Location: login.php");
+                header("Location: ../login.php");
             }
 
             $bdd = new PDO("mysql:host=localhost;dbname=projet_if3;charset=utf8", "root", "");
+
 
             $id = $_GET["id"];
 
@@ -60,6 +85,7 @@
             } 
            
         ?>
+    
 
         <label>Email adress : </label>
         <?php
@@ -85,25 +111,25 @@
         ?>
         <br>
 
-        <label>Your Level : </label>
+        <label>Level : </label>
         <?php
             echo $data["level"];
         ?>   
         <br>
 
-        <label>Your weight (in kg) : </label>
+        <label>Weight (in kg) : </label>
         <?php
             echo $data["weight"];
         ?>
         <br>
 
-        <label>Your height (in cm) : </label>
+        <label>Height (in cm) : </label>
         <?php
             echo $data["size"];
         ?>
 
         <div>       
-            <h2>Runs</h2>
+            <h2>Runs :</h2>
 
             <?php
                 $req_run = $bdd->prepare("SELECT run_saved.id_run, run.distance, run.time FROM run_saved 
@@ -116,7 +142,7 @@
                 $run = $req_run->fetch();
 
                 if($run == null) {
-                    echo"Pas de run pour le moment (message à changer)";
+                    echo "This person has no run yet.";
                 } else {
 
                     $i = 0;
@@ -171,7 +197,7 @@
                         </tr>
                     </table>
                     <div>
-                        <h4> Comments </h4>
+                        <h4> Comments :</h4>
                         <div class="comments">
                             <p>
                                 <?php

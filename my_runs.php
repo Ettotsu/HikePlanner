@@ -102,7 +102,7 @@
                             }
                             echo "<br>distance : ".$run["distance"]."km";
                             $time = explode(":", $run["time"]);
-                            echo " time : ";
+                            echo " ; time : ";
 
                             if($time[0] != 0) {
                                 echo $time[0]."h";

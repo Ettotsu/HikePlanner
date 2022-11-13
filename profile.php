@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Hikeplanner - Profile</title>
+        <title>Hikeplanner - My profile</title>
         <meta charset="utf-8"/>
         <link rel="stylesheet" type="text/css" href="projet_css/profile.css"/>
     </head>
