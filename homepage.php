@@ -80,11 +80,9 @@
                 echo $var["username"]."<br>".$var["first_name"]."  ".$var["last_name"]."<br>".$var["level"];
                 ?>
                 </p>
+                <a href="profile.php">View my profile</a>
                 <br>
-                <a href="profile.php">My profile</a>
-            </div>
-
-            <div>
+                <p><strong>Following accounts : </strong>
                 <?php
                     $req_follow = $bdd->prepare("SELECT username FROM account
                                                     INNER JOIN follow ON account.id = follow.id_followed 
@@ -93,11 +91,13 @@
 
                     foreach($req_follow as $value) {
                         if($value != null) {
-                            echo "<div>".$value["username"]."</div>";
+                            echo "<br>".$value["username"];
                         }
                     }
                 ?>
+                </p>
             </div>
+
 
             <div class="se">
                 <?php
