@@ -59,14 +59,17 @@ main{
     border-radius: 6px;
     float: left;
     text-align: center;
+    padding: 6px;
 }
 .side img{
     border-radius: 50%;
 }
-
-div.side a p{
+.side p{
     color: white;
-    text-decoration: none;
+}
+.side a{
+    color: white;
+    text-decoration: underline;
 }
 
 .se{

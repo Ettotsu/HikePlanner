@@ -73,7 +73,14 @@
                 <br>
                 <br>
                 <p>
+                <?php
+                $username=$bdd->prepare("SELECT username,  level, first_name, last_name FROM account WHERE id=?");
+                $username->execute([$_SESSION['id_account']]);
+                $var = $username->fetch();
+                echo $var["username"]."<br>".$var["first_name"]."  ".$var["last_name"]."<br>".$var["level"]
+                ?>
                 </p>
+                <br>
                 <a href="profile.php">My profile</a>
             </div>
 
