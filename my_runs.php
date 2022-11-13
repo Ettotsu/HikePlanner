@@ -7,30 +7,35 @@
         <title>HikePlanner - My Runs</title>
     </head>
 
-    <header>
-		<img class="logo" src="./projet_css/HikePlanner.png"/>
-
-		<h1>My Runs</h1>
-
-		<nav>
-			<ul>
-				<li>
-					<a class="butt" href="homepage.php">Homepage</a>
-				</li>
-
-				<li>
-					<a class="butt" href="hikeplanner_map_v3.php">New Run</a>
-				</li>
-				
-				<li>
-					<a class="butt" href="my_runs.php">My Runs</a>
-				</li>
-			</ul>
-		</nav>
-	</header>
     
     <body>
-        <div>       
+    <header>
+            <img class="logo" src="./projet_css/HikePlanner_homepage.png"/>
+
+
+            <nav>
+            <h1 class="h">My runs</h1>
+                <ul>
+                    <br>
+                    <br>
+                    <li>
+                        <a class="butt" href="homepage.php">Homepage</a>
+                    </li>
+    
+                    <li>
+                        <a class="butt" href="hikeplanner_map_v3.php">New Run</a>
+                    </li>
+                    
+                    <li>
+                        <a class="butt" href="my_runs.php">My Runs</a>
+                    </li>
+                </ul>
+            </nav>
+            <form class="deco" method='post'>
+                    <input type='submit' class='decob' name='button' value='Disconnect'>
+        </form>
+    </header>
+        <main>       
             <?php
                 session_start();
 
@@ -258,6 +263,6 @@
                     }
                 }
             ?>
-        </div>
+        </main>
     </body>
 </html>

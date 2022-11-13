@@ -139,7 +139,7 @@
                     </div>
 
                     <div class="table_run">
-                        <h3> <?php echo "distance :".$parkour["distance"]."km time :".$parkour["estimated_time"]; ?> </h3>
+                        <h3> <?php echo "distance : ".$parkour["distance"]."km time : ".$parkour["estimated_time"]; ?> </h3>
                         <table>
                             <tr>
                                 <th></th>

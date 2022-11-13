@@ -3,6 +3,21 @@
     width: 800px;
 }
 
+input[type="submit"]{
+    cursor:pointer;
+    color: white;
+    background-color: rgb(49, 102, 7);
+    border: none;
+    border-radius: 6px;
+    padding: 6px;
+}
+input[type="submit"]:hover{
+    background-color: rgb(23, 45, 5);
+
+}
+
+
+
 header:not(.deco){
     background-color: rgb(64, 137 , 6);
     border-radius: 6px;
@@ -45,9 +60,9 @@ nav li:hover{
 .deco{
     text-align: right;
     margin-left: auto;
+    color: green;
 
 }
-
 
 main{
     display: flex;
@@ -78,4 +93,27 @@ main{
 
 .follow{
     margin-left: 7%;
+}
+
+
+table {
+    border-width:1px; 
+    border-style:solid; 
+    border-color:black;
+    border-collapse: collapse;
+}
+
+td { 
+    border-width:1px;
+    border-style:solid; 
+    border-color:black;
+    width: 8rem;
+}
+
+.comments {
+    border-width:1px;
+    border-style:solid; 
+    border-color:black;
+    width: 41rem;
+    height: 4rem;
 }
